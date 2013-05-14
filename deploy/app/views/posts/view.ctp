@@ -306,7 +306,9 @@
 		<?=$form->text('User.email', array('class' => 'big_input medium_input '));?><br/>		
 	<? } ?>
 	
-	<?$recaptcha->display_form('echo');?>
+	<? 
+	// TODO make recaptcha implementation parameterized
+	//$recaptcha->display_form('echo');?>
 	
 	<br/>
 	<?=$form->end(__d('verb','Answer',true));?>

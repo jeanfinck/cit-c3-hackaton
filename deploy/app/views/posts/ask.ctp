@@ -111,7 +111,9 @@
 <?=$form->checkbox('Post.notify', array('checked' => true));?>
 <span style="margin-left: 5px;"><?= __('Notify me when my question is answered.',true) ?></span>
 
-<?$recaptcha->display_form('echo');?>
+<?
+// TODO make recaptcha implementation parameterized
+//$recaptcha->display_form('echo');?>
 
 <?=$form->end( __('Ask a question',true));?>
 
