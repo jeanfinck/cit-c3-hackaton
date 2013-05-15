@@ -37,6 +37,7 @@ if (file_exists(TMP.'installed.txt')) {
     
 	Router::connect('/', array('controller' => 'posts', 'action' => 'display', 'recent'));
 	Router::connect('/maintenance', array('controller' => 'posts', 'action' => 'maintenance'));
+	Router::connect('/oauth', array('controller' => 'oauth', 'action' => 'index'));
 	
 	Router::connect('/questions/unanswered', array('controller' => 'posts', 'action' => 'display', 'unanswered'));
     Router::connect('/questions/hot', array('controller' => 'posts', 'action' => 'display', 'hot'));
