@@ -6,6 +6,10 @@ class OauthController extends AppController {
   var $uses = array();
   
   public function index() {
+    
+    // ?code=4/jfmq71CSkccBpANqnzVUoVKtpQvS.Ase_LcDh9YIfshQV0ieZDApuJ5tLfQI&authuser=0&prompt=consent&session_state=b30986130b849ea6b827b54de19e95d5258d50fa..df95
+    
+    
     // Set your cached access token. Remember to replace $_SESSION with a
     // real database or memcached.
     session_start();
@@ -35,6 +39,8 @@ class OauthController extends AppController {
     
     if ($client->getAccessToken()) {
       $me = $plus->people->get('me');
+      
+      var_dump($me); die;
     
       // These fields are currently filtered through the PHP sanitize filters.
       // See http://www.php.net/manual/en/filter.filters.sanitize.php
@@ -59,8 +65,8 @@ class OauthController extends AppController {
       $_SESSION['access_token'] = $client->getAccessToken();
     } else {
       $authUrl = $client->createAuthUrl();
+      print "<a href=$authUrl>login</a>";
     }
-    
-
+  }
 }
 ?>
