@@ -6,34 +6,32 @@
   <?php print render($title_suffix); ?>
 
   <div<?php print $content_attributes; ?>>
-  <?php
-    hide($content['comments']);
-    hide($content['links']);
-    print render($content);
-  ?>
-  </div>
-  <?php if(!empty($user_picture) || $title || (!empty($submitted) && $display_submitted)): ?>
-    <header<?php print $header_attributes; ?>>
+    
+    <div class="question">
+      <?php print render($content['body']);?>
+    </div>
+    
+    <div class="tags categories">
+      <?php print render($content['field_question_category']);?>
+      <?php print render($content['field_question_tags']);?>
+    </div>
 
-      <?php print $user_picture; ?>
-
-      <?php if ($title && !$page): ?>
-        <h1<?php print $title_attributes; ?>>
-          <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
-        </h1>
+    <div class="user-data">
+      <?php print render($content['field_question_user']);?>
+    
+      <?php if (!empty($user_picture)): ?>
+        <div class="user-picture"><?php print $user_picture; ?></div>
       <?php endif; ?>
-
-    </header>
-  <?php endif; ?>
-  
-  <?php if ($display_submitted): ?>
-    <div class="submitted"><?php print $submitted; ?></div>
-  <?php endif; ?>
       
-  <?php if ($links = render($content['links'])): ?>
-    <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
-  <?php endif; ?>
+      <?php if ($display_submitted): ?>
+        <div class="submitted"><?php print $submitted; ?></div>
+      <?php endif; ?>
+    </div>  
+  
+  </div>
 
-  <?php print render($content['comments']); ?>
+  <div class="comment">
+    <?php print render(drupal_get_form('contribute_comment_form')); ?>
+  </div>
 
 </article>
