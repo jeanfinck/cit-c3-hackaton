@@ -4,6 +4,10 @@
  * Implements a Q&A platform for CI&T collaborators.
  */
 
+module_load_include('inc', 'contribute', 'contribute.ask');
+module_load_include('inc', 'contribute', 'contribute.answer');
+module_load_include('inc', 'contribute', 'contribute.comment');
+
 /**
  * Define menu items and page callbacks.
  *
@@ -23,14 +27,4 @@ function contribute_menu() {
   );
 
   return $items;
-}
-
-/**
- * Form constructor for Ask a Question form.
- *
- * @return array
- *   An array of form items.
- */
-function contribute_ask_form() {
-
 }
