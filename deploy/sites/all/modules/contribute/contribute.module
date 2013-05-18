@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Implements a Q&A platform for CI&T collaborators.
+ */
+
+/**
+ * Define menu items and page callbacks.
+ *
+ * @return array
+ *   An array of menu items.
+ */
+function contribute_menu() {
+  $items = array(
+
+    'questions/ask' => array(
+      'title' => 'Ask a Question',
+      'access callback' => 'user_is_logged_in',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('contribute_ask_form'),
+    ),
+
+  );
+
+  return $items;
+}
+
+/**
+ * Form constructor for Ask a Question form.
+ *
+ * @return array
+ *   An array of form items.
+ */
+function contribute_ask_form() {
+
+}
