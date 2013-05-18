@@ -44,14 +44,16 @@ div.messages {
 }
 
 h1#site-name { /* 48px */
-  font-size: 3.692em;
-  margin: 0 0 0.2em 0;
+  font-size: 2.5em;
+  margin: 0.3em 0 0.2em 0;
   padding: 0;
 }
 h2#site-slogan {
   font-size: 1.077em;
-  margin: 0;
+  margin: 0 0 0 20px;
   padding: 0;
+  overflow: hidden;
+  clear: left;
 }
 #site-name {
   font-size: 1.846em;
