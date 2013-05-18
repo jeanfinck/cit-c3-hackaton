@@ -1,0 +1,14 @@
+name = Text
+description = Defines simple text field types.
+package = Core
+version = VERSION
+core = 7.x
+dependencies[] = field
+files[] = text.test
+required = TRUE
+
+; Information added by drupal.org packaging script on 2013-05-16
+version = "7.22+41-dev"
+project = "drupal"
+datestamp = "1368674793"
+
