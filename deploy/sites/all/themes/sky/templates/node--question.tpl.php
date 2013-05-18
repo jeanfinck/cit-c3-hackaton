@@ -3,7 +3,15 @@
   <?php print $unpublished; ?>
 
   <?php print render($title_prefix); ?>
+  <?php print render($title_suffix); ?>
 
+  <div<?php print $content_attributes; ?>>
+  <?php
+    hide($content['comments']);
+    hide($content['links']);
+    print render($content);
+  ?>
+  </div>
   <?php if(!empty($user_picture) || $title || (!empty($submitted) && $display_submitted)): ?>
     <header<?php print $header_attributes; ?>>
 
@@ -15,23 +23,13 @@
         </h1>
       <?php endif; ?>
 
-      <?php if ($display_submitted): ?>
-        <div class="submitted"><?php print $submitted; ?></div>
-      <?php endif; ?>
-
     </header>
   <?php endif; ?>
-
-  <?php print render($title_suffix); ?>
-
-  <div<?php print $content_attributes; ?>>
-  <?php
-    hide($content['comments']);
-    hide($content['links']);
-    print render($content);
-  ?>
-  </div>
-
+  
+  <?php if ($display_submitted): ?>
+    <div class="submitted"><?php print $submitted; ?></div>
+  <?php endif; ?>
+      
   <?php if ($links = render($content['links'])): ?>
     <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
   <?php endif; ?>
