@@ -11,7 +11,6 @@ article > header {
 }
 article .submitted {
   color: #666;
-  font-size: 0.923em;
   padding: 0 0 0.6em 0;
   position: relative;
 }
@@ -28,14 +27,20 @@ article .links a:visited {
   padding: 0.3em 0.8em;
 }
 .node header.with-picture {
-  height: 3.5em;
-  height: auto !important;
   min-height: 3.5em;
-  padding-left: 60px;
+  float: right;
+  padding: 3px 3px 3px 50px;
+  font-size: 0.688em;
+  background: #eee;
+  border: 1px solid #ccc;
+  font-family: 'Trebuchet MS','Helvetica Neue',Arial,Helvetica,sans-serif;
+  width: 160px;
+  margin: 10px 0 10px 10px;
+  overflow: hidden;
 }
 .node header .user-picture {
   left: 0;
-  top: 3px;
+  top: 0;
   height: 45px;
   position: absolute;
   width: 45px;
@@ -81,4 +86,26 @@ article .tags .field-label,
   padding: 0.5em 1em;
   white-space: nowrap;
   font-size: 0.857em;
+}
+
+/* TAG */
+.field-name-field-question-tags a {
+    background: #25bec6;
+    display: inline-block;
+    margin: 0 20px 15px 0;
+    padding: 3px 10px;
+    font-size: 0.75em;
+    color:#fff !important;
+    position: relative;
+    font-style:normal;
+    font-family: 'Trebuchet MS','Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+.field-name-field-question-tags a:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    right: -24px;
+    top: 0;
+    border: 12px solid transparent;
+    border-left: 12px solid #25bec6;
 }
