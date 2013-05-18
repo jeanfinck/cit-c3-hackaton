@@ -21,7 +21,7 @@ function contribute_menu() {
       'title' => 'Ask a Question',
       'access callback' => 'user_is_logged_in',
       'page callback' => 'drupal_get_form',
-      'page arguments' => array('contribute_ask_form'),
+      'page arguments' => array('contribute_question_form'),
     ),
 
   );
