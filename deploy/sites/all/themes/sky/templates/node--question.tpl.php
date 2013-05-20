@@ -11,11 +11,6 @@
       <?php print render($content['body']);?>
     </div>
     
-    <div class="tags categories">
-      <?php print render($content['field_question_category']);?>
-      <?php print render($content['field_question_tags']);?>
-    </div>
-
     <div class="user-data">
       <?php print render($content['field_question_user']);?>
     
@@ -26,8 +21,13 @@
       <?php if ($display_submitted): ?>
         <div class="submitted"><?php print $submitted; ?></div>
       <?php endif; ?>
-    </div>  
-  
+    </div> 
+    
+    <div class="tags categories">
+      <?php print render($content['field_question_category']);?>
+      <?php print render($content['field_question_tags']);?>
+    </div>
+
   </div>
 
   <div class="comment">
