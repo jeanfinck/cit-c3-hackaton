@@ -3,39 +3,44 @@
   <?php print $unpublished; ?>
 
   <?php print render($title_prefix); ?>
+  <?php print render($title_suffix); ?>
 
-  <?php if(!empty($user_picture) || $title || (!empty($submitted) && $display_submitted)): ?>
-    <header<?php print $header_attributes; ?>>
+  <div<?php print $content_attributes; ?>>
 
-      <?php print $user_picture; ?>
+    <div class="question">
+      <?php
+      print render($content['body']);?>
+    </div>
 
-      <?php if ($title && !$page): ?>
-        <h1<?php print $title_attributes; ?>>
-          <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
-        </h1>
+    <div class="user-data">
+      <?php print render($content['field_question_user']);?>
+
+      <?php if (!empty($user_picture)): ?>
+        <div class="user-picture"><?php print $user_picture; ?></div>
       <?php endif; ?>
 
       <?php if ($display_submitted): ?>
         <div class="submitted"><?php print $submitted; ?></div>
       <?php endif; ?>
+    </div>
 
-    </header>
-  <?php endif; ?>
+    <div class="tags categories">
+      <?php print render($content['field_question_category']);?>
+      <?php print render($content['field_question_tags']);?>
+    </div>
 
-  <?php print render($title_suffix); ?>
+    <div class="answers">
 
-  <div<?php print $content_attributes; ?>>
-  <?php
-    hide($content['comments']);
-    hide($content['links']);
-    print render($content);
-  ?>
+    </div>
+
   </div>
 
-  <?php if ($links = render($content['links'])): ?>
-    <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
-  <?php endif; ?>
+  <div class="comment-box">
+    <?php //print render(drupal_get_form('contribute_comment_form')); ?>
+  </div>
 
-  <?php print render($content['comments']); ?>
+  <div class="answer new">
+    <?php print render(drupal_get_form('contribute_answer_form')); ?>
+  </div>
 
 </article>

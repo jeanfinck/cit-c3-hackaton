@@ -4,9 +4,12 @@
  * Implements a Q&A platform for CI&T collaborators.
  */
 
+define('CONTRIBUTE_QUESTION_CONTENT_TYPE', 'question');
+
 module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
 module_load_include('inc', 'contribute', 'contribute.comment');
+module_load_include('inc', 'contribute', 'contribute.debug');
 module_load_include('inc', 'contribute', 'gamification');
 
 /**
