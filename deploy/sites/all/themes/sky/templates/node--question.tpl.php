@@ -6,32 +6,41 @@
   <?php print render($title_suffix); ?>
 
   <div<?php print $content_attributes; ?>>
-    
+
     <div class="question">
-      <?php print render($content['body']);?>
+      <?php
+      print render($content['body']);?>
     </div>
-    
+
     <div class="user-data">
       <?php print render($content['field_question_user']);?>
-    
+
       <?php if (!empty($user_picture)): ?>
         <div class="user-picture"><?php print $user_picture; ?></div>
       <?php endif; ?>
-      
+
       <?php if ($display_submitted): ?>
         <div class="submitted"><?php print $submitted; ?></div>
       <?php endif; ?>
-    </div> 
-    
+    </div>
+
     <div class="tags categories">
       <?php print render($content['field_question_category']);?>
       <?php print render($content['field_question_tags']);?>
     </div>
 
+    <div class="answers">
+
+    </div>
+
   </div>
 
-  <div class="comment">
-    <?php print render(drupal_get_form('contribute_comment_form')); ?>
+  <div class="comment-box">
+    <?php //print render(drupal_get_form('contribute_comment_form')); ?>
+  </div>
+
+  <div class="answer new">
+    <?php print render(drupal_get_form('contribute_answer_form')); ?>
   </div>
 
 </article>
