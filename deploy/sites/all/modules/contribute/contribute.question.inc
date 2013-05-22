@@ -10,7 +10,7 @@
  * @return array
  *   An array of form items.
  */
-function contribute_question_form() {
+function contribute_question_form($form, $form_state) {
 
   $form['title'] = array(
     '#title' => t('Title:'),
@@ -37,8 +37,17 @@ function contribute_question_form() {
     '#required' => TRUE,
   );
 
+  $tags = isset($form_state['input']['terms']) ? drupal_explode_tags($form_state['input']['terms']) : array();
+  $terms = array();
+
+  foreach ($tags as $i => $tag) {
+    $terms[$i] = new stdClass;
+    $terms[$i]->tid = 'text';
+    $terms[$i]->name = $tag;
+  }
+
   $form['field_terms'] = array(
-    '#markup' => theme('active_tags_term_list_remove', array('terms' => array())),
+    '#markup' => theme('active_tags_term_list_remove', array('terms' => $tags)),
   );
 
   $form['term_entry'] = array(
@@ -77,8 +86,6 @@ function contribute_question_form() {
 
   $form['tagsa'] = array();
 
-  active_tags_field_widget_form($form, $form, NULL, NULL, NULL, array(), NULL, $form['tagsa']);
-
   return $form;
 }
 
@@ -91,10 +98,6 @@ function contribute_question_form() {
  */
 function contribute_form_contribute_question_form_alter(&$form, &$form_state, $form_id) {
   $form['#after_build'][] = 'contribute_question_form_after_build';
-}
-
-function contribute_form_question_node_form_alter(&$form, &$form_state, $form_id) {
-  //die(print_r($form));
 }
 
 function contribute_question_form_after_build(&$form) {
@@ -128,7 +131,6 @@ function contribute_question_form_validate(&$form, &$form_state) {
  * @return [type]
  */
 function contribute_question_form_submit($form, &$form_state) {
-  //die(print_r($form_state));
   if (!empty($form_state['values']['tags'][LANGUAGE_NONE])) {
     $typed_terms = drupal_explode_tags($form_state['values']['tags'][LANGUAGE_NONE]);
     $tags = array();
@@ -153,12 +155,12 @@ function contribute_question_form_submit($form, &$form_state) {
 
   taxonomy_field_presave(NULL, NULL, NULL, NULL, NULL, $tags);
 
-
   global $user;
 
   $node = new stdClass;
   $node->type = 'question';
   $node->uid = $user->uid;
+  $node->name = $user->name;
   $node->created = strtotime("now");
   $node->changed = strtotime("now");
   $node->status = 1;
@@ -166,13 +168,13 @@ function contribute_question_form_submit($form, &$form_state) {
   $node->promote = 0;
   $node->moderate = 0;
   $node->sticky = 0;
-  $node->title = $form['title']['#value'];
-  $node->body = $form['question']['value']['#value'];
+  $node->revision = 0;
+  $node->title = $form_state['values']['title'];
+  $node->body[LANGUAGE_NONE][0] = $form_state['values']['question'];
 
   foreach ($tags as $tag) {
     $node->field_question_tags[LANGUAGE_NONE][]['tid'] = $tag['tid'];
   }
-//die(print_r($node));
 
   node_save($node);
 

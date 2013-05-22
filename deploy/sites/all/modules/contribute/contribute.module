@@ -7,6 +7,7 @@
 module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
 module_load_include('inc', 'contribute', 'contribute.comment');
+module_load_include('inc', 'contribute', 'contribute.debug');
 
 /**
  * Define menu items and page callbacks.
