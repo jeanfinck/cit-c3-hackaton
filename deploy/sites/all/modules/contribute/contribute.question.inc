@@ -37,36 +37,47 @@ function contribute_question_form() {
     '#required' => TRUE,
   );
 
-  $form['tags'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'field-type-taxonomy-term-reference',
-        'field-name-field-question-tags',
-        'field-widget-taxonomy-autocomplete',
-      )
-    ),
-    '#tree' => TRUE,
-    '#language' => LANGUAGE_NONE,
-    LANGUAGE_NONE => array(
-      '#language' => LANGUAGE_NONE,
-      '#entity_type' => 'node',
-      '#bundle' => 'question',
-      '#field_name' => 'field_question_tags',
-      '#columns' => array('tid'),
-      '#title' => t('Tags:'),
-      '#type' => 'textfield',
-      '#autocomplete_path' => 'taxonomy/autocomplete/field_question_tags',
-      '#after_build' => array('field_form_element_after_build'),
-      '#field_parents' => array(),
-    ),
-    '#access' => TRUE,
+  $form['field_terms'] = array(
+    '#markup' => theme('active_tags_term_list_remove', array('terms' => array())),
   );
+
+  $form['term_entry'] = array(
+    '#type' => 'textfield',
+    '#default_value' => '',
+    '#autocomplete_path' => 'taxonomy/autocomplete/field_question_tags',
+    '#size' => 60,
+    '#maxlength' => 1024,
+    '#attributes' => array('class' => array('at-term-entry')),
+    '#theme_wrappers' => array(),
+  );
+
+  $form['add_button'] = array(
+    '#type' => 'button',
+    '#value' => t('Add'),
+    '#attributes' => array('class' => array('at-add-btn')),
+  );
+
+  $form['terms'] = array(
+    '#type' => 'hidden',
+    '#size' => 60,
+    '#maxlength' => 1024,
+    '#attributes' => array('class' => array('at-terms')),
+    '#theme_wrappers' => array(),
+  );
+
 
   $form['submit'] = array(
     '#value' => t('Post your question'),
     '#type' => 'submit',
   );
+
+  drupal_add_css(drupal_get_path('module', 'active_tags') . '/active_tags.css');
+  drupal_add_js(array('activeTags' => array('mode' => 'single')), 'setting');
+  drupal_add_js(drupal_get_path('module', 'active_tags') . '/active_tags.js');
+
+  $form['tagsa'] = array();
+
+  active_tags_field_widget_form($form, $form, NULL, NULL, NULL, array(), NULL, $form['tagsa']);
 
   return $form;
 }
@@ -80,6 +91,10 @@ function contribute_question_form() {
  */
 function contribute_form_contribute_question_form_alter(&$form, &$form_state, $form_id) {
   $form['#after_build'][] = 'contribute_question_form_after_build';
+}
+
+function contribute_form_question_node_form_alter(&$form, &$form_state, $form_id) {
+  //die(print_r($form));
 }
 
 function contribute_question_form_after_build(&$form) {
