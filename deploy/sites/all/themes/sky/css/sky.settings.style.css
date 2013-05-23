@@ -329,16 +329,10 @@ form.node-form div.field-type-image img {
   border-radius: 0 0 8px 8px; 
 }
 .rc-10 #columns   {
-  -moz-border-radius: 0 10px 10px 10px;
-  -webkit-border-top-left-radius: 0;
-  -webkit-border-top-right-radius: 10px;
-  -webkit-border-bottom-right-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -khtml-border-radius-topleft: 0;
-  -khtml-border-radius-topright: 10px;
-  -khtml-border-radius-bottomright: 10px;
-  -khtml-border-radius-bottomleft: 10px;
-  border-radius: 0 10px 10px 10px; 
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px; 
 }
 .rc-10 #page > footer,
 .rc-10 .region-top-menu  {
