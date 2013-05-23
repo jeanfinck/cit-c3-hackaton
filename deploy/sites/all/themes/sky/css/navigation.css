@@ -146,7 +146,7 @@ ul.sf-menu {
   display: inline;
 }
 #breadcrumb {
-  font-size: 1.231em;
+  font-size: 0.8em;
   margin: 5px 0;
 }
 #breadcrumb a,
@@ -155,6 +155,8 @@ ul.sf-menu {
   font-size: 0.846em;
   line-height: 28px;
   margin: 0;
+  font-family: arial;
+  color: gray;
 }
 #breadcrumb li.crumb span {
   margin: 0 .25em;
@@ -222,6 +224,7 @@ div#tasks {
   margin-top: 20px;
   margin-bottom: 10px;
   padding: 0;
+  overflow: hidden;
 }
 .not-front.page-node div#tasks {
   margin-top: 0;

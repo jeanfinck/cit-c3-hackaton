@@ -107,7 +107,7 @@ input, select, textarea, button {
   font-family: "Helvetica Neue", Helvetica, Clean, Arial, sans-serif;
 }
 input.form-text {
-  max-width: 100%;
+  max-width: 95%;
 }
 input, textarea {
   line-height: 1.3em;
