@@ -5,6 +5,7 @@
  */
 
 define('CONTRIBUTE_QUESTION_CONTENT_TYPE', 'question');
+define('CONTRIBUTE_ANSWER_CONTENT_TYPE', 'answer');
 
 module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
@@ -38,7 +39,6 @@ function contribute_menu() {
 
   return $items;
 }
-<<<<<<< HEAD
 
 /**
  * Define all blocks provided by the module.
@@ -79,5 +79,14 @@ function contribute_block_view($delta = '') {
   }
   return $block;
 }
-=======
->>>>>>> 94ac86fa3bcf037739d5930b8247210d21f66977
+
+/**
+ * Implementation of hook_preprocess_HOOK().
+ */
+function contribute_preprocess_node(&$variables){
+  if($variables['type'] == CONTRIBUTE_QUESTION_CONTENT_TYPE) {
+    $question_nid = $variables['nid'];
+    $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
+    $variables['correct_answer'] = !empty($variables['field_select_answer'][0]['node']) ? $variables['field_select_answer'][0]['node'] : NULL;
+  }
+}
