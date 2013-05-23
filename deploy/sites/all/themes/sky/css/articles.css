@@ -77,7 +77,7 @@ article .tags .field-label,
 /* TAG */
 .field-name-field-question-tags a,
 .at-term {
-  background: #25bec6;
+  background: gray;
   display: inline-block;
   margin: 0 20px 15px 0;
   padding: 3px 10px;
@@ -98,7 +98,7 @@ article .tags .field-label,
   right: -24px;
   top: 0;
   border: 12px solid transparent;
-  border-left: 12px solid #25bec6;
+  border-left: 12px solid gray;
 }
 .at-term-action-remove {
   background: transparent url('images/bt-remove-tag.png') left top no-repeat;
