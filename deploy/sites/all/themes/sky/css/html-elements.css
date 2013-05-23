@@ -1,12 +1,12 @@
-.button,
-.form-submit {
+#columns .button,
+#columns .form-submit {
   line-height: 2em;
   font-family: Arial;
   color:#DF1D3A !important;
   font-weight: bold !important;
 }
-.button:hover,
-.form-submit:hover {
+#columns .button:hover,
+#columns .form-submit:hover {
 
   background: #DF1D3A !important;
   color: white !important;
@@ -33,6 +33,8 @@ article .node-content .button {
   color: gray;
 }
 
+
+
 /* html elements */
 html {
   font-size: 100%;
@@ -41,7 +43,7 @@ html {
   line-height: 1.5;
   height: 100%;
   overflow-y: scroll;
-  background: #eeece9;
+  background: #eeece9 url("images/bg-top.png") top center repeat-x;
 }
 /* changing bg*/
 

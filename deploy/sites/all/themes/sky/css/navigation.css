@@ -63,7 +63,10 @@ ul.menu ul {
 #menu-bar,
 #menu-bar .menu-wrapper {
   clear: both;
-  margin: 0;
+  margin: 0 0 10px;
+  overflow: hidden;
+  height: 35px;
+  padding-top: 10px;
 }
 #menu-bar .menu-wrapper ul.menu {
   margin: 0;
@@ -79,9 +82,17 @@ ul.menu ul {
 #menu-bar .menu-wrapper li a,
 #menu-bar .menu-wrapper .menu li a {
   display: block;
-  line-height: 2.5em;
-  padding: 0 2em;
+  line-height: 1.5em;
+  padding: 2px 1em;
+  font-size: 14px;
   white-space: nowrap;
+  background: gray;
+  color: white;
+  margin-right: 1em;
+}
+#menu-bar .menu-wrapper li a:hover,
+#menu-bar .menu-wrapper .menu li a:hover {
+  background: #df1d3a;
 }
 #menu-bar .menu-wrapper ul.menu li {
   padding: 0;

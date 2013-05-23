@@ -444,7 +444,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-bottomleft: 0;
   border-radius: 4px 4px 0 0;
 }
-.rct-6 #menu-bar .menu-toggle a,
+/*.rct-6 #menu-bar .menu-toggle a,
 .rct-6 #menu-bar .menu-wrapper > ul > li,
 .rct-6 #menu-bar .menu-wrapper > ul > li > a,
 .rct-6 .region-header .block-content > ul > li,
@@ -459,7 +459,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-bottomright: 0;
   -khtml-border-radius-bottomleft: 0;
   border-radius: 6px 6px 0 0;
-}
+}*/
 .rct-6 #menu-bar .menu-toggle a,
 .rct-8 #menu-bar .menu-wrapper > ul > li,
 .rct-8 #menu-bar .menu-wrapper > ul > li > a,
