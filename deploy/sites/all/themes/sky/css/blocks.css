@@ -56,7 +56,7 @@
 }
 #search-block-form input.form-submit,
 #search-form input.form-submit {
-  background: url(images/search-button.png) no-repeat scroll center top transparent;
+  background: url('images/search-button.png') no-repeat scroll center top transparent !important;
   border-color: #E4E4E4 #D2D2D2 #B4B4B4;
   cursor: pointer;
   height: 25px;
@@ -72,11 +72,11 @@
 #search-block-form input.form-submit:focus,
 #search-form input.form-submit:hover,
 #search-form input.form-submit:focus {
-  background-position: center bottom;
+  background-position: center bottom !important;
 }
 .ie6-7 #search-block-form input.form-submit:hover,
 .ie6-7 #search-block-form input.form-submit:focus,
 .ie6-7 #search-form input.form-submit:hover,
 .ie6-7 #search-form input.form-submit:focus {
-  background-position: center -25px;
+  background-position: center -25px !important;
 }

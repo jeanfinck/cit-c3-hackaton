@@ -57,16 +57,19 @@ ul.menu ul {
 }
 
 /* Any menu block in the menu-bar region. */
+html,body {margin: 0 !important}
 .menu-toggle {
   display: none;
+}
+.menu-toggle a {
+  color: white;
 }
 #menu-bar,
 #menu-bar .menu-wrapper {
   clear: both;
   margin: 0 0 10px;
   overflow: hidden;
-  height: 35px;
-  padding-top: 10px;
+  padding-top: 9px;
 }
 #menu-bar .menu-wrapper ul.menu {
   margin: 0;
