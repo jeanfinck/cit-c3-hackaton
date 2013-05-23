@@ -41,7 +41,9 @@ h1#site-name {
 h2#site-slogan {
   font-size: 0.9em;
 }
-#logo {
+#logo,
+.user-data,
+.node header.with-picture {
   float: none;
 }
 .region-top-menu {
@@ -74,6 +76,10 @@ h2#site-slogan {
 #menu-bar .menu-wrapper .menu li a {
   display: block;
   padding: 0 0.5em;
+  margin: 0;
+  text-align: center;
+  font-size: 1em;
+  border-bottom: 1px solid #666;
   -moz-border-radius: 0 !important;
   -webkit-border-radius: 0 !important;
   border-radius: 0 !important;
@@ -87,8 +93,9 @@ h2#site-slogan {
 }
 
 #menu-bar .menu-wrapper ul.menu li {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  width: 85%;
 }
 
 ul.sf-menu {

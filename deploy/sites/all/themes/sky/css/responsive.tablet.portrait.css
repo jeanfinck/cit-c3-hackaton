@@ -13,3 +13,8 @@ h1#site-name {
 #menu-bar .menu-wrapper .menu li {
   margin-right: 2px;
 }
+
+.user-data,
+.node header.with-picture {
+  float: none !important;
+}
