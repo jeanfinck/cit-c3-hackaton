@@ -42,6 +42,7 @@
 ;----------// Scripts
 
   scripts[] = js/scripts.js
+  scripts[] = js/answer_votes.js
 
   ; Internet Explorer Scripts
   ;

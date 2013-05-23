@@ -25,3 +25,8 @@ tabel .field-type-image img {
   width: 100%;
   height: auto;
 }
+
+/* Answer Votes */
+div.answer div.vote a {
+  cursor: pointer;
+}

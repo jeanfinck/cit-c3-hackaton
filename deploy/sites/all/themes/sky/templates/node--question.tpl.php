@@ -32,28 +32,30 @@
       <?php if (!empty($correct_answer)):?>
       <div class="answer answer-nid-<?php print $correct_answer->nid;?> correct">
         <div class="vote">
-          <a title="This answer is useful" class="vote-up-off">up vote</a>
-          <span class="vote-count-post ">
+          <input type="hidden" value="<?php print $correct_answer->nid;?>">
+          <a title="This answer is useful" class="vote-up">up vote</a>
+          <span class="vote-count-post">
           <?php print render(field_view_field('node', $correct_answer, 'field_answer_votes', array('label'=>'hidden')));?>
           </span>
-          <a title="This answer is not useful" class="vote-down-off">down vote</a>
+          <a title="This answer is not useful" class="vote-down">down vote</a>
           <span class="vote-accepted-on">accepted</span>
         </div>
-        
+
         <?php print render(field_view_field('node', $correct_answer, 'body', array('label'=>'hidden')));?>
       </div>
       <?php endif;?>
-      
+
       <!-- Other Answers -->
       <?php if (!empty($correct_answer)){ unset($answers[$correct_answer->nid]); } // Remove correct answer from the normal list
       foreach ($answers as $nid => $answer_node): ?>
       <div class="answer answer-nid-<?php print $nid;?>">
         <div class="vote">
-          <a title="This answer is useful" class="vote-up-off">up vote</a>
+          <input type="hidden" value="<?php print $nid;?>">
+          <a title="This answer is useful" class="vote-up">up vote</a>
           <span class="vote-count-post ">
           <?php print render(field_view_field('node', $answer_node, 'field_answer_votes', array('label'=>'hidden')));?>
           </span>
-          <a title="This answer is not useful" class="vote-down-off">down vote</a>
+          <a title="This answer is not useful" class="vote-down">down vote</a>
         </div>
         <?php print render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')));?>
       </div>
@@ -69,5 +71,4 @@
   <div class="answer new">
     <?php print render(drupal_get_form('contribute_answer_form')); ?>
   </div>
-
 </article>

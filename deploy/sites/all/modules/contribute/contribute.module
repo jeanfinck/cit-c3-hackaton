@@ -6,6 +6,8 @@
 
 define('CONTRIBUTE_QUESTION_CONTENT_TYPE', 'question');
 define('CONTRIBUTE_ANSWER_CONTENT_TYPE', 'answer');
+define('CONTRIBUTE_VOTE_UP', 'up');
+define('CONTRIBUTE_VOTE_DOWN', 'down');
 
 module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
@@ -33,6 +35,13 @@ function contribute_menu() {
       'access callback' => TRUE,
       'page callback' => '_gimme_scores',
       'page arguments' => array(1),
+      'type' => MENU_CALLBACK,
+    ),
+    'post/answer/vote/%/%' => array(
+      'title' => 'Add Votes in a Answer',
+      'access arguments' => array('access content'),
+      'page callback' => 'contribute_add_answer_vote',
+      'page arguments' => array(3, 4),
       'type' => MENU_CALLBACK,
     ),
   );
