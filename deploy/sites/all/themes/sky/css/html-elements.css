@@ -1,3 +1,37 @@
+@font-face {
+font-family: 'pwsmalliconsmedium';
+src: url('pwsmallicons-icon.eot');
+src: url('pwsmallicons-icon.eot?#iefix') format('embedded-opentype'),
+     url('pwsmallicons-icon.woff') format('woff'),
+     url('pwsmallicons-icon.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+.color-black {color: #1da7ad;}
+.color-red {color: #DF1D3A;}
+.icon-font {
+  font-family: 'pwsmalliconsmedium';
+  font-size: 2em;
+  font-weight: normal !important;
+}
+.button {
+  line-height: 2em;
+  font-family: Arial;
+}
+.button:hover {
+  background: #DF1D3A !important;
+  color: white !important;
+}
+.button:hover .icon-font {
+  color: white;
+}
+
+article .node-content .button {
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /* html elements */
 html {
   font-size: 100%;
