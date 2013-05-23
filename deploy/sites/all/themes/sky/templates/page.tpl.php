@@ -4,6 +4,8 @@
 
   <header id="header" class="clearfix" role="banner">
 
+  <?php print render($page['menu_bar']); ?>
+
     <?php if ($site_logo || $site_name || $site_slogan): ?>
       <!-- start: Branding -->
       <div id="branding" class="branding-elements clearfix">
@@ -34,7 +36,6 @@
     <?php endif; ?>
 
     <?php print render($page['header']); ?>
-    <?php print render($page['menu_bar']); ?>
 
   </header>
 
