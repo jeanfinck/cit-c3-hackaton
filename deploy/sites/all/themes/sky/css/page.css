@@ -27,6 +27,7 @@ div.messages {
   background: white;
   border-radius: 10px;
   min-height: 600px;
+  margin-bottom: 20px;
 }
 #page > header {
   clear: both;
@@ -245,8 +246,3 @@ div.messages {
 .popout { background-position: 0 -264px; }
 .search { background-position: 0 -330px; }
 .x { background-position: 0 -396px;}
-
-
-#contribute-advice-accept-form .form-submit {
-  /*background: grey;}*/
-}
