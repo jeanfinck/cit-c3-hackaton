@@ -140,6 +140,8 @@ article .tags .field-label,
   position: absolute;
   width: 45px;
 }
+
+/* user */
 .user-data .user-picture img {
   padding: 0;
   border:0; 
