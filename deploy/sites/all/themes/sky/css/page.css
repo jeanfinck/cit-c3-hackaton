@@ -24,6 +24,9 @@ div.messages {
 }
 .columns-inner {
   padding-top: 20px;
+  background: white;
+  border-radius: 10px;
+  min-height: 600px;
 }
 #page > header {
   clear: both;

@@ -27,6 +27,10 @@ article .links a:visited {
   display: inline-block;
   padding: 0.3em 0.8em;
 }
+article .node-content a{
+  color: #df1d3a;
+  text-decoration: underline;
+}
 .node header.with-picture {
   min-height: 3.5em;
   float: right;
