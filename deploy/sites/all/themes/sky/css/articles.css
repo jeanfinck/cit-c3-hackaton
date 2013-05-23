@@ -123,15 +123,16 @@ article .tags .field-label,
 .user-data {
   min-height: 3.5em;
   float: right;
-  padding: 3px 3px 3px 50px;
+  padding: 3px 3px 2px 50px;
   font-size: 0.688em;
-  background: #eee;
-  border: 1px solid #ccc;
+  background: #ffecef;
+  border: 2px solid #df1d3a;
   font-family: 'Trebuchet MS','Helvetica Neue',Arial,Helvetica,sans-serif;
   width: 160px;
-  margin: -30px 0 10px 10px;
+  margin: -20px 10px 10px 10px;
   overflow: hidden;
   position: relative;
+  border-radius: 5px;
 }
 .user-data .user-picture {
   left: 0;
@@ -139,7 +140,10 @@ article .tags .field-label,
   height: 45px;
   position: absolute;
   width: 45px;
+  background: white;
+  border-right: 1px solid #df1d3a;
 }
+.user-data .field-label-hidden {display: none;}
 
 /* user */
 .user-data .user-picture img {

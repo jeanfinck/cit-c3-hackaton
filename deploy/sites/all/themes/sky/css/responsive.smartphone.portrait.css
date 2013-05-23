@@ -41,7 +41,9 @@ h1#site-name {
 h2#site-slogan {
   font-size: 0.9em;
 }
-
+#logo {
+  float: none;
+}
 .region-top-menu {
   height: auto;
 }

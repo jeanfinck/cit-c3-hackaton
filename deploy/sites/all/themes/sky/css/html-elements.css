@@ -1,3 +1,21 @@
+@font-face {
+font-family: 'pwsmalliconsmedium';
+src: url('pwsmallicons-icon.eot');
+src: url('pwsmallicons-icon.eot?#iefix') format('embedded-opentype'),
+     url('pwsmallicons-icon.woff') format('woff'),
+     url('pwsmallicons-icon.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+.icon-font {
+  font-family: 'pwsmalliconsmedium';
+  font-weight: normal !important;
+  font-size: 1.5em;
+  text-shadow: 1px 1px 1px #CCC;
+}
+.color-red { color:#DF1D3A;}
+
 #columns .button,
 #columns .form-submit {
   line-height: 2em;
@@ -7,8 +25,7 @@
 }
 #columns .button:hover,
 #columns .form-submit:hover {
-
-  background: #DF1D3A !important;
+  background: #DF1D3A;
   color: white !important;
 }
 
@@ -17,20 +34,32 @@ article .node-content .button {
   font-weight: bold;
 }
 
+#switch_edit-question-value {
+  color: gray;
+  font-size: 0.8em;
+}
+#switch_edit-question-value:hover {
+  text-decoration: underline;
+}
+
 .nomargin {margin-bottom: 0 !important}
 
 #contribute-question-form .form-submit {float: left; clear: both; margin-top: 30px;}
 #contribute-question-form .at-add-btn {margin:0 0.5em !important; font-size: 13px !important; float: none; clear: none; margin-top: 0}
 
-#block-block-1 {
+.region-sidebar-second .block-block {
   border-left: 1px dashed gray;
   min-height: 500px;
 }
-#block-block-1 h2 {
+.region-sidebar-second .block-block h2 {
   color: #DF1D3A;
 }
-#block-block-1 .block-content {
+.region-sidebar-second .block-content {
   color: gray;
+}
+.region-sidebar-second .block-content a {
+  font-size: 0.8em;
+  color: black;
 }
 
 
