@@ -12,10 +12,15 @@
  */
 function contribute_question_form($form, $form_state) {
 
+  if (!isset($_SESSION['advice_accepted']) || !$_SESSION['advice_accepted']) {
+    drupal_goto('questions/ask/advice');
+  }
+
   $form['title'] = array(
     '#title' => t('Title:'),
     '#type' => 'textfield',
     '#required' => TRUE,
+    '#placeholder' => t("what's your programming question? be specific"),
   );
 
   $form['category'] =  array(
@@ -47,7 +52,7 @@ function contribute_question_form($form, $form_state) {
   }
 
   $form['field_terms'] = array(
-    '#markup' => theme('active_tags_term_list_remove', array('terms' => $tags)),
+    '#markup' => theme('active_tags_term_list_remove', array('terms' => $terms)),
   );
 
   $form['term_entry'] = array(
@@ -76,13 +81,14 @@ function contribute_question_form($form, $form_state) {
 
 
   $form['submit'] = array(
-    '#value' => t('Post your question'),
+    '#value' => t('Post Your Question'),
     '#type' => 'submit',
   );
 
   drupal_add_css(drupal_get_path('module', 'active_tags') . '/active_tags.css');
   drupal_add_js(array('activeTags' => array('mode' => 'single')), 'setting');
   drupal_add_js(drupal_get_path('module', 'active_tags') . '/active_tags.js');
+  drupal_add_js(drupal_get_path('module', 'contribute') . '/js/contribute.question.js');
 
   $form['tagsa'] = array();
 
@@ -179,4 +185,41 @@ function contribute_question_form_submit($form, &$form_state) {
   node_save($node);
 
   drupal_set_message("Your question has been posted!");
+}
+
+/**
+ * [contribute_advice_accept_form description]
+ * @return [type]
+ */
+function contribute_advice_accept_form() {
+  $items['accept'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('thanks, I will keep these tips in mind when asking'),
+  );
+
+  $items['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('proceed'),
+  );
+
+  return $items;
+}
+
+/**
+ * [contribute_advice_accept_form description]
+ * @return [type]
+ */
+function contribute_advice_accept_form_validate($form, &$form_state) {
+  if (!$form_state['values']['accept']) {
+    form_set_error('accept', t('Please read our advices on asking a new question.'));
+  }
+}
+
+/**
+ * [contribute_advice_accept_form description]
+ * @return [type]
+ */
+function contribute_advice_accept_form_submit($form, &$form_state) {
+  $_SESSION['advice_accepted'] = TRUE;
+  drupal_goto('questions/ask');
 }
