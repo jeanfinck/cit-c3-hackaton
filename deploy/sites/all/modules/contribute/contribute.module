@@ -10,6 +10,7 @@ module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
 module_load_include('inc', 'contribute', 'contribute.comment');
 module_load_include('inc', 'contribute', 'contribute.debug');
+module_load_include('inc', 'contribute', 'gamification');
 
 /**
  * Define menu items and page callbacks.
@@ -19,18 +20,25 @@ module_load_include('inc', 'contribute', 'contribute.debug');
  */
 function contribute_menu() {
   $items = array(
-
     'questions/ask' => array(
       'title' => 'Ask a Question',
       'access callback' => 'user_is_logged_in',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('contribute_question_form'),
     ),
-
+    'scores/%' => array(
+      'title' => 'scores to a user',
+      'access arguments' => array('access content'),
+      'access callback' => TRUE,
+      'page callback' => '_gimme_scores',
+      'page arguments' => array(1),
+      'type' => MENU_CALLBACK,
+    ),
   );
 
   return $items;
 }
+<<<<<<< HEAD
 
 /**
  * Define all blocks provided by the module.
@@ -71,3 +79,5 @@ function contribute_block_view($delta = '') {
   }
   return $block;
 }
+=======
+>>>>>>> 94ac86fa3bcf037739d5930b8247210d21f66977
