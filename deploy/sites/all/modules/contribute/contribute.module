@@ -32,3 +32,42 @@ function contribute_menu() {
   return $items;
 }
 
+/**
+ * Define all blocks provided by the module.
+ *
+ * @return array
+ *   An associative array whose keys define the delta for each
+ *   block and whose values contain the block descriptions.
+ */
+function contribute_block_info() {
+  // This example comes from node.module.
+  $blocks['advice_accept'] = array(
+    'info' => t('Accept advice'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+    'status' => 1,
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'questions/ask/advice',
+  );
+
+  return $blocks;
+}
+
+/**
+ * Return a rendered or renderable view of a block.
+ *
+ * @return array
+ *   An array containing the following elements: subject and content.
+ */
+function contribute_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'advice_accept':
+      $block['subject'] = t('');
+      $block['content'] = drupal_get_form('contribute_advice_accept_form');
+      break;
+  }
+  return $block;
+}
