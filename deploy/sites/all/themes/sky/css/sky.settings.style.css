@@ -3,7 +3,7 @@
 /* Left */
 .hl-l #branding {
   float: left;
-  margin: 0 20px; 
+  margin: 0 20px;
 }
 .hl-l .region-header {
   float: right;
@@ -21,7 +21,7 @@
 /* Right */
 .hl-r #branding {
   float: right;
-  margin: 0 20px; 
+  margin: 0 20px;
 }
 .hl-r .region-header {
   float: left;
@@ -40,7 +40,7 @@
 .hl-c #branding {
   float: none;
   margin: auto;
-  text-align: center; 
+  text-align: center;
 }
 .hl-c .region-header {
   display: table;
@@ -101,7 +101,7 @@
   line-height: 1;
 }
 
-/* Override image alignment with short codes, 
+/* Override image alignment with short codes,
    its takes a lot to override the theme settings for image alignment */
 body .image-left,
 body div.image-left,
@@ -197,8 +197,8 @@ form.node-form div.field-type-image img {
 /* Bullets */
 .mb-n ul.menu {
   padding: 0;
-} 
-.mb-n ul li.leaf,   
+}
+.mb-n ul li.leaf,
 .mb-n ul li.collapsed,
 .mb-n ul li.expanded {
   list-style: none;
@@ -208,7 +208,7 @@ form.node-form div.field-type-image img {
 .mb-ah ul.menu {
   padding: 0 0 0 0.5em;
 }
-.mb-ah ul li.leaf,   
+.mb-ah ul li.leaf,
 .mb-ah ul li.collapsed,
 .mb-ah ul li.expanded {
   list-style-image: url(images/ts/arrow-head.png);
@@ -216,31 +216,31 @@ form.node-form div.field-type-image img {
 .mb-ad ul.menu {
   padding: 0 0 0 0.6em;
 }
-.mb-ad ul li.leaf,   
+.mb-ad ul li.leaf,
 .mb-ad ul li.collapsed,
 .mb-ad ul li.expanded {
   list-style-image: url(images/ts/arrow-double.png);
 }
 .mb-ca ul.menu {
   padding: 0 0 0 1em;
-} 
-.mb-ca ul li.leaf,   
+}
+.mb-ca ul li.leaf,
 .mb-ca ul li.collapsed,
 .mb-ca ul li.expanded {
   list-style-image: url(images/ts/arrow-circle.png);
 }
 .mb-fa ul.menu {
   padding: 0 0 0 1em;
-} 
-.mb-fa ul li.leaf,   
+}
+.mb-fa ul li.leaf,
 .mb-fa ul li.collapsed,
 .mb-fa ul li.expanded {
   list-style-image: url(images/ts/arrow-fat.png);
 }
 .mb-sa ul.menu {
   padding: 0 0 0 1em;
-} 
-.mb-sa ul li.leaf,   
+}
+.mb-sa ul li.leaf,
 .mb-sa ul li.collapsed,
 .mb-sa ul li.expanded {
   list-style-image: url(images/ts/arrow-skinny.png);
@@ -263,7 +263,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 4px;
   -khtml-border-radius-bottomright: 4px;
   -khtml-border-radius-bottomleft: 4px;
-  border-radius: 0 4px 4px 4px; 
+  border-radius: 0 4px 4px 4px;
 }
 .rc-4 #page > footer,
 .rc-4 .region-top-menu {
@@ -276,7 +276,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 0;
   -khtml-border-radius-bottomright: 4px;
   -khtml-border-radius-bottomleft: 4px;
-  border-radius: 0 0 4px 4px; 
+  border-radius: 0 0 4px 4px;
 }
 .rc-6 #columns  {
   -moz-border-radius: 0 6px 6px 6px;
@@ -288,7 +288,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 6px;
   -khtml-border-radius-bottomright: 6px;
   -khtml-border-radius-bottomleft: 6px;
-  border-radius: 0 6px 6px 6px; 
+  border-radius: 0 6px 6px 6px;
 }
 .rc-6 #page > footer,
 .rc-6 .region-top-menu {
@@ -301,7 +301,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 0;
   -khtml-border-radius-bottomright: 6px;
   -khtml-border-radius-bottomleft: 6px;
-  border-radius: 0 0 6px 6px; 
+  border-radius: 0 0 6px 6px;
 }
 .rc-8 #columns {
   -moz-border-radius: 0 8px 8px 8px;
@@ -313,7 +313,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 8px;
   -khtml-border-radius-bottomright: 8px;
   -khtml-border-radius-bottomleft: 8px;
-  border-radius: 0 8px 8px 8px; 
+  border-radius: 0 8px 8px 8px;
 }
 .rc-8 #page > footer,
 .rc-8 .region-top-menu {
@@ -326,16 +326,15 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 0;
   -khtml-border-radius-bottomright: 8px;
   -khtml-border-radius-bottomleft: 8px;
-  border-radius: 0 0 8px 8px; 
+  border-radius: 0 0 8px 8px;
 }
 .rc-10 #columns   {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   -khtml-border-radius: 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
-.rc-10 #page > footer,
-.rc-10 .region-top-menu  {
+.rc-10 #page > footer {
   -moz-border-radius: 0 0 10px 10px;
   -webkit-border-top-left-radius: 0;
   -webkit-border-top-right-radius: 0;
@@ -345,7 +344,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 0;
   -khtml-border-radius-bottomright: 10px;
   -khtml-border-radius-bottomleft: 10px;
-  border-radius: 0 0 10px 10px; 
+  border-radius: 0 0 10px 10px;
 }
 .rc-12 #columns   {
   -moz-border-radius: 0 12px 12px 12px;
@@ -357,7 +356,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 12px;
   -khtml-border-radius-bottomright: 12px;
   -khtml-border-radius-bottomleft: 12px;
-  border-radius: 0 12px 12px 12px; 
+  border-radius: 0 12px 12px 12px;
 }
 .rc-12 #page > footer,
 .rc-12 .region-top-menu  {
@@ -370,7 +369,7 @@ form.node-form div.field-type-image img {
   -khtml-border-radius-topright: 0;
   -khtml-border-radius-bottomright: 12px;
   -khtml-border-radius-bottomleft: 12px;
-  border-radius: 0 0 12px 12px; 
+  border-radius: 0 0 12px 12px;
 }
 
 /* remove rc from column if footer is active */
@@ -379,7 +378,7 @@ form.node-form div.field-type-image img {
 .rc-8 .with-footer #columns,
 .rc-10 .with-footer #columns,
 .rc-12 .with-footer #columns {
-	-moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomright: 0;
   -moz-border-radius-bottomleft: 0;
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-bottom-left-radius: 0;
@@ -532,13 +531,18 @@ form.node-form div.field-type-image img {
 
 /* IE6/7 */
 .ie6-7 .mbp-c #menu-bar .menu-wrapper  ul {
-	float: left;
-	position: relative;
-	left: 50%;
+  float: left;
+  position: relative;
+  left: 50%;
 }
 .ie6-7 .mbp-c #menu-bar .menu-wrapper  .sf-menu ul li {
-	left: 0;
+  left: 0;
 }
 .ie6-7 .mbp-c #menu-bar .menu-wrapper  .sf-menu li {
-	left: -50%;
+  left: -50%;
+}
+
+input[type=search] {
+   -moz-appearance:none;
+   -webkit-appearance:none;
 }

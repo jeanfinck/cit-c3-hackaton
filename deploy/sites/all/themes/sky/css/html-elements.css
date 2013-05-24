@@ -17,7 +17,8 @@ font-style: normal;
 .color-red { color:#DF1D3A;}
 
 #columns .button,
-#columns .form-submit {
+#columns .form-submit,
+.region-header .form-submit {
   line-height: 2em;
   font-family: Arial;
   color:#DF1D3A !important;

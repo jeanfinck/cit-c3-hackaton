@@ -99,3 +99,12 @@ function contribute_preprocess_node(&$variables){
     $variables['correct_answer'] = !empty($variables['field_select_answer'][0]['node']) ? $variables['field_select_answer'][0]['node'] : NULL;
   }
 }
+
+function contribute_node_insert($node) {
+  switch ($node->type) {
+    case 'question':
+      $path = pathauto_create_alias('node', 'insert', 'node/' . $node->nid, array('node' => $node), $node->type);
+      drupal_goto($path['alias']);
+      break;
+  }
+}

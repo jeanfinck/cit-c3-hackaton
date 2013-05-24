@@ -17,14 +17,14 @@ function contribute_question_form($form, $form_state) {
   }
 
   $form['title'] = array(
-    '#title' => t('Title:'),
+    '#title' => t('Title'),
     '#type' => 'textfield',
     '#required' => TRUE,
     '#placeholder' => t("what's your programming question? be specific"),
   );
 
   $form['category'] =  array(
-    '#title' => t('Category:'),
+    '#title' => t('Category'),
     '#type' => 'select',
     '#options' => array('- Select a main category -'),
   );
@@ -56,13 +56,13 @@ function contribute_question_form($form, $form_state) {
   );
 
   $form['term_entry'] = array(
+    '#title' => t('Tags'),
     '#type' => 'textfield',
-    '#default_value' => '',
     '#autocomplete_path' => 'taxonomy/autocomplete/field_question_tags',
     '#size' => 60,
     '#maxlength' => 1024,
     '#attributes' => array('class' => array('at-term-entry')),
-    '#theme_wrappers' => array(),
+    '#placeholder' => 'at least one tag such as (c# c arrays), max 5 tags'
   );
 
   $form['add_button'] = array(
@@ -73,6 +73,8 @@ function contribute_question_form($form, $form_state) {
 
   $form['terms'] = array(
     '#type' => 'hidden',
+    '#title' => t('Tags'),
+    '#required' => TRUE,
     '#size' => 60,
     '#maxlength' => 1024,
     '#attributes' => array('class' => array('at-terms')),
@@ -89,8 +91,6 @@ function contribute_question_form($form, $form_state) {
   drupal_add_js(array('activeTags' => array('mode' => 'single')), 'setting');
   drupal_add_js(drupal_get_path('module', 'active_tags') . '/active_tags.js');
   drupal_add_js(drupal_get_path('module', 'contribute') . '/js/contribute.question.js');
-
-  $form['tagsa'] = array();
 
   return $form;
 }
@@ -137,8 +137,8 @@ function contribute_question_form_validate(&$form, &$form_state) {
  * @return [type]
  */
 function contribute_question_form_submit($form, &$form_state) {
-  if (!empty($form_state['values']['tags'][LANGUAGE_NONE])) {
-    $typed_terms = drupal_explode_tags($form_state['values']['tags'][LANGUAGE_NONE]);
+  if (!empty($form_state['values']['terms'])) {
+    $typed_terms = drupal_explode_tags($form_state['values']['terms']);
     $tags = array();
 
     foreach ($typed_terms as $typed_term) {
@@ -172,6 +172,7 @@ function contribute_question_form_submit($form, &$form_state) {
   $node->status = 1;
   $node->comment = 0;
   $node->promote = 0;
+  $node->language = LANGUAGE_NONE;
   $node->moderate = 0;
   $node->sticky = 0;
   $node->revision = 0;
@@ -183,7 +184,6 @@ function contribute_question_form_submit($form, &$form_state) {
   }
 
   node_save($node);
-
   drupal_set_message("Your question has been posted!");
 }
 

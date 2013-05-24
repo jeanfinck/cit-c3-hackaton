@@ -44,15 +44,27 @@
   padding-left: 0;
   padding-right: 0;
 }
+.region-header {
+  float: right;
+}
 .region-header .block-search .inner {
   padding: 0;
 }
 #search-form input#edit-keys,
-#block-search-form .form-item-search-block-form input {
+#block-search-form {
+  float: right;
+}
+#block-search-form .form-item-search-block-form input[type="search"] {
   float: left; /* LTR */
-  font-size: 1em;
+  font-size: 0.8em;
+  padding: 0px;
+  width: 200px;
   margin-right: 5px;
-  width: 62%;
+  margin-top: 2px;
+  height: 24px;
+  border: none;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
 }
 #search-block-form input.form-submit,
 #search-form input.form-submit {
@@ -66,6 +78,7 @@
   padding: 0;
   text-indent: -9999px;
   width: 34px;
+  margin-top: 2px;
   text-transform: uppercase; /* IE7 hack to trigger text indent reliably */
 }
 #search-block-form input.form-submit:hover,
@@ -79,4 +92,47 @@
 .ie6-7 #search-form input.form-submit:hover,
 .ie6-7 #search-form input.form-submit:focus {
   background-position: center -25px !important;
+}
+
+#top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: rgb(213, 213, 213);
+}
+#top-bar .top-bar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+#top-bar .top-bar-inner .notifications {
+  display: block;
+  float: left;
+  width: 32px;
+  height: 32px;
+  background: url('images/cit-symbol.png') no-repeat scroll center top transparent;
+}
+.region-header .block-inner {
+  margin: 0;
+}
+.region-header .block-menu {
+  margin: 50px 0 35px 0 !important;
+  font-weight: bold;
+}
+.block-menu .block-inner,
+.block-menu .block-inner .last a {
+  margin-right: 0;
+}
+#block-system-main-menu .last {
+  margin-left: 107px;
+}
+
+.block-connector input {
+  margin: 27px 0 0;
+}
+
+#block-system-user-menu {
+  float: right;
 }
