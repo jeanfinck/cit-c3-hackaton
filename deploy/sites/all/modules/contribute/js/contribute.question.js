@@ -27,7 +27,7 @@ function initSideBarBlocks() {
 
 function initTags() {
   jQuery('#edit-term-entry').keypress(function(e) {
-    if (e.keyCode == 32) {
+    if (e.charCode == 32) {
       jQuery('#edit-add-button').click();
     }
   });
