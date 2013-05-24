@@ -17,6 +17,10 @@ div.messages {
 }
 /* Panel pages need negative margin equal to the gutter width applied to #content,
   this is taken care of in theme settings as per above for normal gutters */
+#columns {
+  max-width: 960px;
+  margin: 0 auto;
+}
 #content .panel-display,
 #content .panel-flexible {
   margin-left: -20px;
@@ -26,8 +30,8 @@ div.messages {
   padding-top: 10px;
   background: white;
   border-radius: 10px;
-  min-height: 600px;
-  margin-bottom: 20px;
+  min-height: 460px;
+  margin-bottom: 10px;
 }
 #page {
   margin-top: 30px;
@@ -37,7 +41,7 @@ div.messages {
 }
 #branding {
   float: left;
-  margin: 7px 0 22px 0;
+  margin: 7px 0 22px 25px;
   width: 40%;
 }
 #logo {
@@ -47,6 +51,9 @@ div.messages {
 #page > header > hgroup {
   line-height: 1.2;
   margin: 0 20px;
+}
+.region-header {
+  margin-right: 25px;
 }
 
 h1#site-name { /* 48px */

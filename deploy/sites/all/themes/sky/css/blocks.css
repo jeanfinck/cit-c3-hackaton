@@ -110,8 +110,8 @@
 #top-bar .top-bar-inner .notifications {
   display: block;
   float: left;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: url('images/cit-symbol.png') no-repeat scroll center top transparent;
 }
 .region-header .block-inner {
@@ -124,9 +124,6 @@
 .block-menu .block-inner,
 .block-menu .block-inner .last a {
   margin-right: 0;
-}
-#block-system-main-menu .last {
-  margin-left: 107px;
 }
 
 .block-connector input {
