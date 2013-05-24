@@ -216,9 +216,9 @@ $databases = array (
     'default' =>
     array (
       'database' => 'contribute',
-      'username' => 'root',
-      'password' => 'frisbis',
-      'host' => 'localhost',
+      'username' => 'contribute',
+      'password' => 'contribute',
+      'host' => 'jnjdevapd03.cit',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
