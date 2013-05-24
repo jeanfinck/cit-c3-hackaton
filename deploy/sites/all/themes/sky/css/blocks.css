@@ -54,6 +54,9 @@
 #block-search-form {
   float: right;
 }
+#block-search-form {
+  margin-right: 10px;
+}
 #block-search-form .form-item-search-block-form input[type="search"] {
   float: left; /* LTR */
   font-size: 0.8em;
@@ -112,6 +115,7 @@
   float: left;
   width: 30px;
   height: 30px;
+  margin-left: 10px;
   background: url('images/cit-symbol.png') no-repeat scroll center top transparent;
 }
 .region-header .block-inner {

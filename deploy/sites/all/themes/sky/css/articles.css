@@ -169,3 +169,35 @@ article .tags .field-label,
   height: 45px;
   width: 45px;
 }
+.answer {
+  overflow: hidden;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+/* voting */
+.vote {
+  float: left;
+  margin-right: 30px;
+}
+.vote-count-post {
+  font-family: 'Trebuchet', Arial;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+}
+.vote-count-post .field {
+  padding: 0;
+}
+.vote .vote-up,
+.vote .vote-down {
+  width: 34px;
+  height: 32px;
+  display: block;
+  text-indent: -999em;
+  font-size: 1px;
+  background: url('images/votes.png') no-repeat;
+}
+.vote .vote-down {
+  background-position: right top;
+}
