@@ -73,7 +73,7 @@ html {
   line-height: 1.5;
   height: 100%;
   overflow-y: scroll;
-  background: #eeece9 url("images/bg-top.png") top center repeat-x;
+  background: #eeece9;
 }
 /* changing bg*/
 
