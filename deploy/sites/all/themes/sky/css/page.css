@@ -38,6 +38,8 @@ div.messages {
 }
 #page > header {
   clear: both;
+  margin: 0 auto;
+  max-width: 960px;
 }
 #branding {
   float: left;
