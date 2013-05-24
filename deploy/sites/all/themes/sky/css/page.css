@@ -340,10 +340,10 @@ div.messages {
   margin-left: 10px;
   display: inline-block;
 }
-.views-field-field-question-category .java {
+.java .views-field-field-question-category a {
   background-image: url('images/bg_java.png')
 }
-.views-field-field-question-category .drupal {
+.drupal .views-field-field-question-category a {
   background-image: url('images/bg_drupal.png')
 }
 
