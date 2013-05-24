@@ -29,7 +29,7 @@
 	<li><a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-questioner.png" /><span>
 	<strong>Questioner</strong><br /> Pure CSS popup tooltips with clean semantic XHTML.</span></a></li>
 	<li><a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-favorite.png" /><span>
-	<strong>The Favorite</strong><br /> Pure CSS popup tooltips with clean semantic XHTML.</span></a></li>
+	<strong>The Favorite</strong><br /> Receive at least 10 votes</span></a></li>
 	<li class="inactive"><a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-achiever.png" /><span>
 	<strong>Achiever</strong><br /> Collect at least 7 badges</span></a></li>
 </ul>
