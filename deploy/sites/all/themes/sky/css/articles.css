@@ -76,8 +76,9 @@ article .tags .field-label,
 
 /* TAG */
 .field-name-field-question-tags a,
-.at-term {
-  background: rgb(187, 187, 187);
+.at-term,
+.views-field-title div a {
+  background: #bbb;
   display: inline-block;
   margin: 15px 15px 0 0;
   padding: 3px 10px;
@@ -90,6 +91,10 @@ article .tags .field-label,
 .at-term {
   padding-right: 20px;
 }
+.views-field-title div a:first-child {
+  display: none;
+}
+.views-field-title div a:after,
 .field-name-field-question-tags a:after,
 .at-term:after {
   display: block;
@@ -98,7 +103,7 @@ article .tags .field-label,
   right: -24px;
   top: 0;
   border: 12px solid transparent;
-  border-left: 12px solid rgb(187, 187, 187);
+  border-left: 12px solid #bbb;
 }
 .at-term-action-remove {
   background: transparent url('images/bt-remove-tag.png') left top no-repeat;
