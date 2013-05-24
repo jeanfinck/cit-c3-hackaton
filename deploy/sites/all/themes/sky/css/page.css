@@ -1,4 +1,6 @@
 /* Page and genereral module styles */
+.headline-wrapper {background: transparent url('images/headline-bg.jpg') -286px 0 repeat-x; }
+.headline {background: transparent url('images/headline-lines.png') -143px 0 repeat-x; display: block; height: 314px; }
 
 /* Gutters - if gutters are set in theme settings they will override these
    values: see Extensions > Modify Output > Design */
@@ -17,8 +19,9 @@ div.messages {
 }
 /* Panel pages need negative margin equal to the gutter width applied to #content,
   this is taken care of in theme settings as per above for normal gutters */
-#columns {
-  max-width: 960px;
+#columns,
+.container {
+  max-width: 960px !important;
   margin: 0 auto;
 }
 #content .panel-display,
@@ -34,7 +37,7 @@ div.messages {
   margin-bottom: 10px;
 }
 #page {
-  margin-top: 30px;
+  margin-top: -250px;
 }
 #page > header {
   clear: both;
@@ -43,7 +46,7 @@ div.messages {
 }
 #branding {
   float: left;
-  margin: 7px 0 22px 25px;
+  margin: 0 0 22px 25px;
   width: 40%;
 }
 #logo {
@@ -60,7 +63,7 @@ div.messages {
 
 h1#site-name { /* 48px */
   font-size: 2.5em;
-  margin: 0.3em 0 0.2em 0;
+  margin: 0 0 0.2em 0;
   padding: 0;
 }
 h2#site-slogan {

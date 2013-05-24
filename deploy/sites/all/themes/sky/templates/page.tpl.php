@@ -1,3 +1,8 @@
+<div class="headline-wrapper">
+  <div class="headline">
+    &nbsp;
+  </div>
+</div>
 <div id="page" class="container <?php print $classes; ?>">
 
   <div id="top-bar">
