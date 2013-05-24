@@ -266,12 +266,7 @@ div.messages {
   text-align: center !important;
 }
 
-#block-system-main .views-row {
-  width: 49%;
-  float:left;
-  background: orange;
-  border:1px solid red;
-}
+
 .prof-blocks {
   float: left;
   margin-right: 4%;
@@ -310,6 +305,49 @@ div.messages {
   border:0;
 }
 .clear { clear: both; line-height: 1px; height: 1px;}
+
+.views-row {
+  border-bottom:1px solid #CCC;
+  overflow: hidden;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.views-row .views-field-title {
+  padding-left: 20px;
+}
+.views-row .views-field {
+  float: left;
+}
+.views-row .views-field:last-child {
+  float: right;
+  clear: right;
+  font-size: 0.8em;
+}
+
+.views-row h3 {
+  margin: 0;
+}
+
+.views-field-field-question-category .java,
+.views-field-field-question-category .drupal {
+  background: transparent url('images/bg_drupal.png') left top no-repeat;
+  width: 20px;
+  height: 24px;
+  text-indent: -999em;
+  font-size: 1px;
+  margin-left: 10px;
+  display: inline-block;
+}
+.views-field-field-question-category .java {
+  background-image: url('images/bg_java.png')
+}
+
+
+.views-row .views-field-created {
+  float: right;
+  clear: left;
+  font-size: 0.8em;
+}
 
 .prof-blocks ul { width: 70%;}
 .prof-blocks li { display: inline-block;}
