@@ -159,6 +159,7 @@ p:first-child,
 p.first-child {
   margin-top: 0;
 }
+.answers p {margin-bottom: 0.5em;}
 
 blockquote:before,
 blockquote:after,
