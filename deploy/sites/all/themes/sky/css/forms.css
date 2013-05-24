@@ -122,8 +122,8 @@ textarea {
   -webkit-border-top-left-radius: 3px;
   border-radius: 3px 3px 0 0;
 }
-input.form-text,
-select[multiple="multiple"] {
+#main-content input.form-text,
+#main-content select[multiple="multiple"] {
   background-color: #fff;
   border: solid 2px #e6e4de !important;
   padding: 4px;
@@ -267,4 +267,11 @@ div.vertical-tabs ul.vertical-tabs-list li {
 body.wysiwygeditor {
   background-color: #fff;
   background-image: none;
+}
+
+#contribute-question-form #edit-title {
+  width: 91%;
+}
+#edit-add-button {
+  display: none;
 }

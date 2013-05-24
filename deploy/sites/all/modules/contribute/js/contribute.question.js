@@ -1,5 +1,7 @@
 jQuery(function() {
   initSideBarBlocks();
+
+  initTags();
 });
 
 function initSideBarBlocks() {
@@ -18,5 +20,15 @@ function initSideBarBlocks() {
   jQuery('#edit-term-entry').focus(function(){
     jQuery('div.region-sidebar-second .block').hide();
     jQuery('#block-block-3').fadeIn();
+  });
+
+  jQuery('#edit-title').focus();
+}
+
+function initTags() {
+  jQuery('#edit-term-entry').keypress(function(e) {
+    if (e.keyCode == 32) {
+      jQuery('#edit-add-button').click();
+    }
   });
 }

@@ -29,12 +29,15 @@ div.messages {
   min-height: 600px;
   margin-bottom: 20px;
 }
+#page {
+  margin-top: 30px;
+}
 #page > header {
   clear: both;
 }
 #branding {
   float: left;
-  margin: 0 0 40px;
+  margin: 7px 0 22px 0;
   width: 40%;
 }
 #logo {
@@ -52,8 +55,8 @@ h1#site-name { /* 48px */
   padding: 0;
 }
 h2#site-slogan {
-  font-size: 1.077em;
-  margin: 0 0 0 20px;
+  font-size: 0.85em;
+  margin: 0;
   padding: 0;
   overflow: hidden;
   clear: left;

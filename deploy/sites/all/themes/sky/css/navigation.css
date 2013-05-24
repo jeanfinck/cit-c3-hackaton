@@ -30,14 +30,13 @@ ul.menu ul {
   margin-left: 15px;
 }
 .region-top-menu {
-  height: 2.5em;
-  margin-bottom: 10px;
+  background: none !important;
 }
 .region-top-menu .block {
   margin: 0;
 }
 .region-top-menu .block-inner {
-  margin: 0 10px;
+  margin: 0;
 }
 .region-top-menu ul.menu {
   margin: 0;
@@ -51,9 +50,16 @@ ul.menu ul {
   margin: 0;
 }
 .region-top-menu .block a {
-  height: 2.5em;
-  line-height: 2.5em;
+  height: 30px;
+  line-height: 30px;
   padding: 0 10px;
+  font-size: 0.8em;
+  font-family: Arial;
+  color: #555;
+}
+.region-top-menu .block a:hover,
+.region-top-menu .block a.active {
+  color: #00a7ac;
 }
 
 /* Any menu block in the menu-bar region. */
@@ -64,47 +70,41 @@ html,body {margin: 0 !important}
 .menu-toggle a {
   color: white;
 }
-#menu-bar,
-#menu-bar .menu-wrapper {
-  clear: both;
-  margin: 0 0 10px;
-  overflow: hidden;
-  padding-top: 9px;
-}
-#menu-bar .menu-wrapper ul.menu {
+.region-header ul.menu {
   margin: 0;
 }
-#menu-bar .menu-wrapper li,
-#menu-bar .menu-wrapper .menu li {
+.region-header li,
+.region-header .menu li {
   display: inline;
   float: left;
   list-style: none;
   margin-left: 0;
   margin-right: 2px;
 }
-#menu-bar .menu-wrapper li a,
-#menu-bar .menu-wrapper .menu li a {
+.region-header li a,
+.region-header .menu li a {
   display: block;
   line-height: 1.5em;
-  padding: 2px 1em;
+  padding: 5px 1.1em;
   font-size: 14px;
   white-space: nowrap;
   background: gray;
   color: white;
   margin-right: 1em;
 }
-#menu-bar .menu-wrapper li a:hover,
-#menu-bar .menu-wrapper .menu li a:hover {
+.region-header li a:hover,
+.region-header .menu li a:hover,
+.region-header .menu li a.active {
   background: #df1d3a;
 }
-#menu-bar .menu-wrapper ul.menu li {
+.region-header ul.menu li {
   padding: 0;
 }
-#menu-bar .block {
+.region-header .block {
   margin: 0;
   padding: 0;
 }
-#menu-bar .block-menu ul.menu ul {
+.region-header .block-menu ul.menu ul {
   display: none;
 }
 

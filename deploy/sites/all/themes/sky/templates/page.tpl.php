@@ -1,6 +1,11 @@
 <div id="page" class="container <?php print $classes; ?>">
 
-  <?php print render($page['top_menu']); ?>
+  <div id="top-bar">
+    <div class="top-bar-inner">
+      <span class="notifications"></span>
+      <?php print render($page['top_menu']); ?>
+    </div>
+  </div>
 
   <header id="header" class="clearfix" role="banner">
 

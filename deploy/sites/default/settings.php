@@ -211,14 +211,14 @@
  * @endcode
  */
 $databases = array (
-  'default' => 
+  'default' =>
   array (
-    'default' => 
+    'default' =>
     array (
       'database' => 'contribute',
       'username' => 'root',
-      'password' => 'p@ssw0rd',
-      'host' => 'jnjdevapd03.cit',
+      'password' => 'frisbis',
+      'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
