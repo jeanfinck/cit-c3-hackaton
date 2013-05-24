@@ -131,6 +131,9 @@ textarea {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
+#edit-term-entry {
+  padding-right: 20px !important;
+}
 .ie9 input.form-text,
 .ie9 select[multiple="multiple"],
 .chrome input.form-text,

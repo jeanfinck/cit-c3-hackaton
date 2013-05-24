@@ -57,9 +57,9 @@ article .node-content .button {
 }
 .region-sidebar-second .block-content {
   color: gray;
+  font-size: 0.8em;
 }
 .region-sidebar-second .block-content a {
-  font-size: 0.8em;
   color: black;
 }
 
