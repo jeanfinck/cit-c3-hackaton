@@ -44,7 +44,7 @@ function initTags() {
     }
   });
   
-  jQuery('#contribute-question-form').on('click', 'span.at-term-action-remove', function(e){
+  jQuery('#contribute-question-form').on('click', 'div.at-term-remove', function(e){
     tagCount--;
   });
 }

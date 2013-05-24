@@ -106,7 +106,7 @@
   background-color: rgb(213, 213, 213);
 }
 #top-bar .top-bar-inner {
-  max-width: 1140px;
+  max-width: 960px;
   margin: 0 auto;
   width: 100%;
 }
@@ -115,7 +115,6 @@
   float: left;
   width: 30px;
   height: 30px;
-  margin-left: 10px;
   background: url('images/cit-symbol.png') no-repeat scroll center top transparent;
 }
 .region-header .block-inner {

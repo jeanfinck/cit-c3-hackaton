@@ -278,3 +278,7 @@ body.wysiwygeditor {
 #edit-add-button {
   display: none;
 }
+
+.form-item input.error, .form-item textarea.error, .form-item select.error {
+  border: 1px solid !important;
+}
