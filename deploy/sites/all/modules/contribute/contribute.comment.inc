@@ -154,10 +154,14 @@ function contribute_add_answer_vote($answer_nid, $vote_type = CONTRIBUTE_VOTE_UP
     if ($vote_type == CONTRIBUTE_VOTE_UP) {
       // Positive Vote
       $total_of_votes++;
+
+      _gimme_scores('upvote');
     }
     elseif ($vote_type == CONTRIBUTE_VOTE_DOWN) {
       // Negative Vote
       $total_of_votes--;
+
+      _gimme_scores('downvote');
     }
 
     // Save Answer, votes and user vote
