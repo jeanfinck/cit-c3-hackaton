@@ -327,10 +327,12 @@ div.messages {
 .views-row h3 {
   margin: 0;
 }
-
-.views-field-field-question-category .java,
-.views-field-field-question-category .drupal {
-  background: transparent url('images/bg_drupal.png') left top no-repeat;
+.views-field-field-question-category {
+  line-height: 0;
+  margin-top: -6px;
+}
+.views-field-field-question-category a {
+  background: left top no-repeat;
   width: 20px;
   height: 24px;
   text-indent: -999em;
@@ -341,7 +343,22 @@ div.messages {
 .views-field-field-question-category .java {
   background-image: url('images/bg_java.png')
 }
+.views-field-field-question-category .drupal {
+  background-image: url('images/bg_drupal.png')
+}
 
+.views-field-php-1 .count,
+.views-field-php .count,
+.views-field-totalcount .count {
+ font-size: 1.8em; font-family: 'Trebuchet', Arial; line-height: 18px; text-align: center;
+}
+
+.views-field-php-1 span,
+.views-field-php span,
+.views-field-totalcount span {
+  font-size: 0.9em;
+  padding-left: 10px;
+}
 
 .views-row .views-field-created {
   float: right;
