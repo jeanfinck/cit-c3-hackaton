@@ -103,6 +103,7 @@ function contribute_preprocess_node(&$variables){
 function contribute_node_insert($node) {
   switch ($node->type) {
     case 'question':
+      module_load_include('inc', 'pathauto');
       $path = pathauto_create_alias('node', 'insert', 'node/' . $node->nid, array('node' => $node), $node->type);
       drupal_goto($path['alias']);
       break;
