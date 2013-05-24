@@ -1,8 +1,24 @@
+<?php
+$file = file_load($user->picture);
+$image = image_load($file->uri);
+
+$picture = array(
+  'file' => array(
+    '#theme' => 'image_style',
+    '#style_name' => 'large',
+    '#path' => $image->source,
+    '#width' => $image->info['width'],
+    '#height' => $image->info['height'],
+  ),
+);
+
+?>
+
 <div class="prof-blocks">
-<h1>Gilberto Carlos Crespo Júnior</h1>
+<h1><?php echo $user->name ?></h1>
 <table>
 	<tr>
-		<td rowspan="2">profile image</td>
+		<td rowspan="2"><?php echo drupal_render($picture);?></td>
 		<td align="right"><em class="labeling">bio</em></td>
 		<td><small>uiasBfsd uifsdb fuiuisbd fuisdbfui sdbuif bsdui bfuisduifbsd uifsuidb fuisd uif bdfuisdb uiui sdui bfuisdb fuisbd uifbsduib fuisd bfuisdbui</small></td>
 	</tr>
@@ -35,13 +51,12 @@
 </ul>
 </div>
 <br class="clear" />
-<div class="prof-blocks">
+<!-- <div class="prof-blocks">
 <h2>Last 10 Questions</h2>
 </div>
 <div class="prof-blocks">
 <h2>Last 10 Answers</h2>
-</div>
-
-<?php
-
-var_dump($user_profile);
+</div> -->
+<script>
+	jQuery('#main-content-header').remove();
+</script>
