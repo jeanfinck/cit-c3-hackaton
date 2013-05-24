@@ -175,3 +175,7 @@
     <?php print $collapsible; ?>
   </section>
 <?php endif; ?>
+<script>
+  jQuery('.view-content > div:odd').addClass('drupal');
+  jQuery('.view-content > div:even').addClass('java');
+</script>
