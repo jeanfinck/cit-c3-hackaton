@@ -25,7 +25,7 @@
 			<img src="/sites/default/files/public/badges/badge-commenter.png" />
 			<span>
 				<strong>Commenter</strong>
-				<br /> Pure CSS popup tooltips with clean semantic XHTML.
+				<br /> Comment at least 10 answers
 			</span>
 		</a>
 	</li>
@@ -34,7 +34,7 @@
 			<img src="/sites/default/files/public/badges/badge-interaction.png" />
 			<span>
 				<strong>First Interaction</strong>
-				<br /> Pure CSS popup tooltips with clean semantic XHTML.
+				<br /> Make a new question or answer
 			</span>
 		</a>
 	</li>
@@ -43,7 +43,7 @@
 			<img src="/sites/default/files/public/badges/badge-mastering.png" />
 			<span>
 				<strong>Technology Mastering</strong>
-				<br /> Pure CSS popup tooltips with clean semantic XHTML.
+				<br /> Answer at least 10 questions in different categories
 			</span>
 		</a>
 	</li>
@@ -59,19 +59,19 @@
 	<li class="inactive">
 		<a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-wise.png" /><span>
 				<strong>The Wise</strong>
-				<br /> Pure CSS popup tooltips with clean semantic XHTML.</span></a></li>
+				<br /> Answer at least 10 questions</span></a></li>
 	<li>
 		<a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-questioner.png" /><span>
 				<strong>Questioner</strong>
-				<br /> Pure CSS popup tooltips with clean semantic XHTML.</span></a></li>
+				<br /> Make at least 10 questions</span></a></li>
 	<li>
 		<a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-favorite.png" /><span>
 				<strong>The Favorite</strong>
 				<br /> Receive at least 10 votes</span></a></li>
 	<li class="inactive">
 		<a href="#" class="tooltip"> <img src="/sites/default/files/public/badges/badge-achiever.png" /><span>
-	<strong>Achiever</strong>
-	<br /> Collect at least 7 badges</span></a></li>
+				<strong>Achiever</strong>
+				<br /> Collect at least 7 badges</span></a></li>
 </ul>
 </div>
 <br class="clear" />
