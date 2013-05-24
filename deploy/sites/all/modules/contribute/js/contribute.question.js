@@ -26,9 +26,25 @@ function initSideBarBlocks() {
 }
 
 function initTags() {
-  jQuery('#edit-term-entry').keypress(function(e) {
-    if (e.charCode == 32) {
-      jQuery('#edit-add-button').click();
+  tagCount = 0;
+  
+  jQuery('#edit-term-entry').keyup(function(e) {
+    if (!jQuery(this).val()) {
+      return;
     }
+    
+    if (e.keyCode == 32 || e.keyCode == 13) {
+      if (tagCount < 5) {
+        tagCount++;
+        jQuery('#edit-add-button').click();
+      }
+      else {
+        alert(Drupal.t("Only 5 tags are allowed.\nPlease remove one tag for adding another."));
+      }
+    }
+  });
+  
+  jQuery('#contribute-question-form').on('click', 'span.at-term-action-remove', function(e){
+    tagCount--;
   });
 }
