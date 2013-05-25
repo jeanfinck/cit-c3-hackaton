@@ -60,7 +60,7 @@
 #block-search-form .form-item-search-block-form input[type="search"] {
   float: left; /* LTR */
   font-size: 0.8em;
-  padding: 0px;
+  padding: 0px 4px;
   width: 200px;
   margin-right: 5px;
   margin-top: 2px;
@@ -103,7 +103,7 @@
   left: 0;
   width: 100%;
   height: 30px;
-  background-color: rgb(213, 213, 213);
+  background-color: rgba(213, 213, 213, 0.70);
 }
 #top-bar .top-bar-inner {
   max-width: 960px;
@@ -129,14 +129,15 @@
   margin-right: 0;
 }
 
-.block-connector input {
-  margin: 27px 0 0;
-}
-
 #block-system-user-menu {
   float: right;
 }
 
 #block-system-main .ckeditor_links {
   display: none !important;
+}
+
+#block-views-tags-block ul {
+  list-style: none;
+  margin-left: 0;
 }

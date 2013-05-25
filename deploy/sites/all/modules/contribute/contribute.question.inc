@@ -142,6 +142,7 @@ function contribute_question_form_submit($form, &$form_state) {
     $tags = array();
 
     foreach ($typed_terms as $typed_term) {
+      $typed_term = strtolower($typed_term);
       // See if the term exists in the chosen vocabulary and return the tid;
       // otherwise, create a new 'autocreate' term for insert/update.
       if ($possibilities = taxonomy_term_load_multiple(array(), array('name' => trim($typed_term), 'vid' => 1))) {
@@ -222,4 +223,8 @@ function contribute_advice_accept_form_validate($form, &$form_state) {
 function contribute_advice_accept_form_submit($form, &$form_state) {
   $_SESSION['advice_accepted'] = TRUE;
   drupal_goto('questions/ask');
+}
+
+function contribute_form_search_block_form_alter(&$form, &$form_state, $form_id) {
+  $form['search_block_form']['#placeholder'] = t('search for questions here!');
 }

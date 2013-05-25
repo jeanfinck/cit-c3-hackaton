@@ -31,7 +31,7 @@
     print render($content);
   ?>
   </div>
-
+  <?php unset($content['links']['statistics']); ?>
   <?php if ($links = render($content['links'])): ?>
     <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
   <?php endif; ?>
