@@ -10,10 +10,10 @@
 		<td align="right"><em class="labeling">bio</em></td>
 		<td><small><?php echo $user_profile['Personal Info']['profile_bio']['#markup'];?></small></td>
 	</tr>
-<!-- 	<tr>
-		<td><em class="labeling">status</em></td>
-		<td>STATUS</td>
-	</tr> -->
+	<tr>
+		<td><em class="labeling">Score</em></td>
+		<td><small>10.000</small></td>
+	</tr>
 	</table>
 </div>
 
