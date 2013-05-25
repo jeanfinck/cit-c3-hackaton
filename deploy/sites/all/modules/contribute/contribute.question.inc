@@ -166,7 +166,7 @@ function contribute_question_form_submit($form, &$form_state) {
 
   $node = new stdClass;
   $node->type = 'question';
-  $node->uid = $user->uid;
+  $node->field_question_user[LANGUAGE_NONE][0]['uid'] = $user->uid;
   $node->name = $user->name;
   $node->created = strtotime("now");
   $node->changed = strtotime("now");
