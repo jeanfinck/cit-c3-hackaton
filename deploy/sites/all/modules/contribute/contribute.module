@@ -109,3 +109,30 @@ function contribute_node_insert($node) {
       break;
   }
 }
+
+function contribute_user_login(&$edit, $account) {
+  drupal_goto('questions');
+}
+
+
+/**
+ * Overrides the default translation of Timeago dates if necessary.
+ */
+function contribute_timeago_add_js() {
+  $library_path = libraries_get_path('timeago');
+  $path = $library_path . '/jquery.timeago.' . $GLOBALS['language']->language . '.js';
+
+  if (file_exists($path)) {
+    drupal_add_js($path, array('scope' => 'footer'));
+    drupal_add_js($library_path . '/timeago.js', array('scope' => 'footer'));
+  }
+}
+
+function contribute_init() {
+  switch (drupal_get_path_alias($_GET['q'])) {
+    case 'questions':
+    case 'questions/unanswered':
+      contribute_timeago_add_js();
+      break;
+  }
+}

@@ -47,7 +47,7 @@ div.messages {
 #branding {
   float: left;
   margin: 0 0 22px 25px;
-  width: 40%;
+  width: 39%;
 }
 #logo {
   padding: 0 20px;
@@ -306,27 +306,38 @@ div.messages {
 }
 .clear { clear: both; line-height: 1px; height: 1px;}
 
+.page-questions #page-title {
+  border-bottom: 1px solid #DDD;
+  padding-bottom: 10px;
+  margin-bottom: 0;
+}
+
 .views-row {
   border-bottom:1px solid #CCC;
   overflow: hidden;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  padding: 16px 0px;
 }
 .views-row .views-field-title {
-  padding-left: 20px;
+  padding-left: 10px;
+  width: 71%;
 }
 .views-row .views-field {
   float: left;
 }
-.views-row .views-field:last-child {
-  float: right;
-  clear: right;
-  font-size: 0.8em;
-}
 
 .views-row h3 {
-  margin: 0;
+  margin: 0 0 7px 0;
+  font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
 }
+#content .views-row a {
+  text-decoration: none;
+}
+#content a:hover {
+  text-decoration: underline;
+}
+
 .views-field-field-question-category {
   line-height: 0;
   margin-top: -6px;
@@ -350,20 +361,67 @@ div.messages {
 .views-field-php-1 .count,
 .views-field-php .count,
 .views-field-totalcount .count {
- font-size: 1.8em; font-family: 'Trebuchet', Arial; line-height: 18px; text-align: center;
+ font-size: 1.6em;
+ font-family: Arial;
+ line-height: 18px;
+ text-align: center;
+ padding: 0 0 6px 0;
 }
 
-.views-field-php-1 span,
-.views-field-php span,
-.views-field-totalcount span {
-  font-size: 0.9em;
-  padding-left: 10px;
+.views-field-php-1 .field-content {
+  color: #555;
 }
 
-.views-row .views-field-created {
-  float: right;
-  clear: left;
+.views-field-php .field-content {
+  color: #9A4444;
+}
+
+.views-field-totalcount .field-content {
+  color: #999;
+}
+
+.views-field-php-1 .field-content,
+.views-field-php .field-content,
+.views-field-totalcount .field-content {
   font-size: 0.8em;
+  padding: 7px;
+  display: block;
+}
+
+.views-row .views-field-created,
+.views-row .views-field-field-question-user-1 {
+  float: right;
+  font-size: 0.8em;
+  display: inline;
+  margin-left: 5px;
+}
+
+.views-row .views-field-field-question-user-1 .field-content {
+  display: inline;
+}
+
+.views-row .views-field-title .tags a,
+#block-views-tags-block ul a {
+  color: #3E6D8E !important;
+  background-color: #E0EAF1;
+  border-bottom: 1px solid #b3cee1;
+  border-right: 1px solid #b3cee1;
+  padding: 3px 4px 2px 4px;
+  margin-right: 2px;
+  text-decoration: none;
+  font-size: 75%;
+  line-height: 2.4;
+  white-space: nowrap;
+}
+
+#block-views-tags-block ul a {
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+
+#block-views-tags-block .views-row {
+  border: none;
+  line-height: 27px;
 }
 
 .prof-blocks ul { width: 70%;}

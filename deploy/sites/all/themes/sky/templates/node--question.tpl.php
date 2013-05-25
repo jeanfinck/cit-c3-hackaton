@@ -53,11 +53,17 @@
           <input type="hidden" value="<?php print $nid;?>">
           <a title="This answer is useful" class="vote-up">up vote</a>
           <span class="vote-count-post ">
-          <?php print render(field_view_field('node', $answer_node, 'field_answer_votes', array('label'=>'hidden')));?>
+          <?php
+            $element = field_view_field('node', $answer_node, 'field_answer_votes', array('label'=>'hidden'));
+            print render($element)
+          ;?>
           </span>
           <a title="This answer is not useful" class="vote-down">down vote</a>
         </div>
-        <?php print render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')));?>
+        <?php
+          $element = field_view_field('node', $answer_node, 'body', array('label'=>'hidden'));
+          print render($element);
+        ?>
       </div>
       <?php endforeach; ?>
     </div>
@@ -69,6 +75,9 @@
   </div>
 
   <div class="answer new">
-    <?php print render(drupal_get_form('contribute_answer_form')); ?>
+    <?php
+      $element = drupal_get_form('contribute_answer_form');
+      print render($element);
+    ?>
   </div>
 </article>

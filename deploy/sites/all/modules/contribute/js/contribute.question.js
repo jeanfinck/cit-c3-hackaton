@@ -27,13 +27,15 @@ function initSideBarBlocks() {
 
 function initTags() {
   tagCount = 0;
-  
+
   jQuery('#edit-term-entry').keyup(function(e) {
-    if (!jQuery(this).val()) {
+    if (!jQuery.trim(jQuery(this).val())) {
       return;
     }
-    
+
     if (e.keyCode == 32 || e.keyCode == 13) {
+      jQuery(this).val(jQuery(this).val().toLowerCase());
+
       if (tagCount < 5) {
         tagCount++;
         jQuery('#edit-add-button').click();
@@ -43,7 +45,7 @@ function initTags() {
       }
     }
   });
-  
+
   jQuery('#contribute-question-form').on('click', 'div.at-term-remove', function(e){
     tagCount--;
   });
