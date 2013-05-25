@@ -1,5 +1,4 @@
 .buildpath
 .project
 .settings/*
-deploy/sites/default/settings.php
 .DS_Store
