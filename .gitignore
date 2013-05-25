@@ -3,5 +3,3 @@
 .settings/*
 deploy/sites/default/settings.php
 .DS_Store
-
-deploy/sites/default/settings.php
