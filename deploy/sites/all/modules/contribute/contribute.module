@@ -116,11 +116,24 @@ function contribute_preprocess_node(&$variables){
  */
 function contribute_node_load($nodes, $types) {
   foreach ($nodes as $nid => $node) {
-    if ($node->type == CONTRIBUTE_ANSWER_CONTENT_TYPE) {
-      $user_id = contribute_get_current_user_id();
-      $already_voted = contribute_user_already_voted_for_answer($user_id, $node);
 
-      $node->current_user_already_voted = $already_voted;
+    switch ($node->type) {
+      case CONTRIBUTE_QUESTION_CONTENT_TYPE:
+        // Adds data info in question nodes
+        // Info: Author details
+        $node->author_details = user_load($node->uid);
+        break;
+
+      case CONTRIBUTE_ANSWER_CONTENT_TYPE:
+        // Adds data info in answer nodes
+        // Info: Current user already voted
+        $user_id = contribute_get_current_user_id();
+        $already_voted = contribute_user_already_voted_for_answer($user_id, $node);
+        $node->current_user_already_voted = $already_voted;
+
+        // Info: Author details
+        $node->author_details = user_load($node->uid);
+        break;
     }
   }
 }
