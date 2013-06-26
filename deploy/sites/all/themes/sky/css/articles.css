@@ -9,11 +9,6 @@ article > header {
  border-bottom: solid 1px #e6e4de;
  position: relative;
 }
-article .submitted {
-  color: #666;
-  padding: 0 0 0.6em 0;
-  position: relative;
-}
 article .node-content {
   padding: 1em 0;
   overflow: hidden;
@@ -52,7 +47,7 @@ article .node-content a,
 article .tags .field-label,
 .node-content .field-type-taxonomy-term-reference h2.field-label {
   display: inline;
-  font-size: 1em;
+  font-size: 90%;
   font-weight: normal;
   margin: 0;
 }
@@ -122,7 +117,6 @@ article .tags .field-label,
 }
 
 /* User box */
-.user-data,
 .node header.with-picture {
   min-height: 3.5em;
   float: right;
@@ -153,8 +147,7 @@ article .tags .field-label,
 .node header.with-picture {
   margin-top: 0;
 }
-.node header.with-picture .user-picture,
-.user-data .user-picture {
+.node header.with-picture .user-picture {
   left: 0;
   top: 0;
   height: 45px;
@@ -163,9 +156,7 @@ article .tags .field-label,
   background: white;
   border-right: 1px solid #df1d3a;
 }
-.user-data .field-label-hidden {display: none;}
 
-.user-data .user-picture img,
 .node header.with-picture .user-picture img {
   padding: 0;
   border:0;
@@ -186,7 +177,7 @@ article .tags .field-label,
 }
 .vote-count-post {
   font-family: 'Trebuchet', Arial;
-  font-size: 1.2em;
+  font-size: 150%;
   font-weight: bold;
   text-align: center;
 }
@@ -204,4 +195,44 @@ article .tags .field-label,
 }
 .vote .vote-down {
   background-position: right top;
+}
+
+article .answers div.already-voted {
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #999999;
+}
+
+/* Answers */
+article div.question, 
+article div.answers,
+article div.user-data {
+  font-size: 85%;
+}
+
+article .answers h2 {
+  border-bottom: 1px solid #cccccc;
+}
+
+article div.answer div.field-name-body {
+  float: left;
+  width: 94%;
+}
+  
+article div.user-data {
+  border: 1px solid #CCCCCC;
+  width: 250px;
+  float: right;
+  font-size: 11px;
+  padding: 6px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+article div.user-data span.time {
+  margin-bottom: 5px;
+  display: block;
+}
+
+article div.user-data img {
+  width: 32px;
 }

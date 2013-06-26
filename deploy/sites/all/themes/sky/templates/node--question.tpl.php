@@ -11,14 +11,18 @@
     </div>
 
     <div class="user-data">
-      <?php print render($content['field_question_user']);?>
-      <?php if (!empty($user_picture)): ?>
-        <div class="user-picture"><?php print $user_picture; ?></div>
-      <?php endif; ?>
-
-      <?php if ($display_submitted): ?>
-        <div class="submitted"><?php print $submitted; ?></div>
-      <?php endif; ?>
+      <span class="time">posted <?php print date('D, d M Y H:i:s', $node->created)?></span>
+      <div class="author">
+        <?php $user_image_path = isset($node->author_details->picture->uri) ? $node->author_details->picture->uri : 'public://pictures/default_user_avatar.png';
+          print theme('image', array(
+                  'path' => $user_image_path,
+                  'title' => $node->author_details->name,
+                  'width' => '32px',
+                  'attributes' => array('align' => 'left', 'hspace' => '10'),
+                ));?>
+        <?php print l($node->author_details->name, 'user/' . $node->uid, array('attributes' => array('target'=>'_blank')));?><br/>
+        <?php print $node->author_details->mail;?>
+      </div>
     </div>
 
     <div class="tags categories">
@@ -27,7 +31,7 @@
     </div>
 
     <div class="answers">
-      <h2><?php print count($answers);?> Answers</h2>
+      <h2 clas="answer-count"><?php print count($answers);?> Answers</h2>
       <!-- Correct Answer -->
       <?php if (!empty($correct_answer)):?>
       <div class="answer answer-nid-<?php print $correct_answer->nid;?> correct">
@@ -62,10 +66,22 @@
           </span>
           <a title="This answer is not useful" class="vote-down">down vote</a>
         </div>
-        <?php
-          $element = field_view_field('node', $answer_node, 'body', array('label'=>'hidden'));
-          print render($element);
-        ?>
+        <?php $element = field_view_field('node', $answer_node, 'body', array('label'=>'hidden'));
+          print render($element);?>
+        <div class="user-data">
+          <span class="time">answered <?php print date('D, d M Y H:i:s', $answer_node->created)?></span>
+          <div class="author">
+            <?php $user_image_path = isset($answer_node->author_details->picture->uri) ? $answer_node->author_details->picture->uri : 'public://pictures/default_user_avatar.png';
+              print theme('image', array(
+                      'path' => $user_image_path,
+                      'title' => $answer_node->author_details->name,
+                      'width' => '32px',
+                      'attributes' => array('align' => 'left', 'hspace' => '10'),
+                    ));?>
+            <?php print l($answer_node->author_details->name, 'user/' . $answer_node->author_details->uid, array('attributes' => array('target'=>'_blank')));?><br/>
+            <?php print $answer_node->author_details->mail;?>
+          </div>
+        </div>
       </div>
       <?php endforeach; ?>
     </div>

@@ -70,10 +70,9 @@ function contribute_answer_form($form, &$form_state) {
  */
 function contribute_answer_form_submit($form, $form_state) {
   $question_nid = contribute_get_node_id_from_question_path($form_state['complete form']['#action']);
-  $user_id = contribute_get_current_user_id();
   $answer_message = $form_state['values']['answer'];
 
-  contribute_add_new_answer($question_nid, $user_id, $answer_message);
+  contribute_add_new_answer($question_nid, $answer_message);
 }
 
 /**
@@ -83,8 +82,8 @@ function contribute_answer_form_submit($form, $form_state) {
  * @param int $user_id
  * @param string $answer_message
  */
-function contribute_add_new_answer($question_nid, $user_id, $answer_message) {
-  if ($question_nid && $user_id && $answer_message) {
+function contribute_add_new_answer($question_nid, $answer_message) {
+  if ($question_nid && $answer_message) {
     $node = new stdClass();
     $node->type = CONTRIBUTE_ANSWER_CONTENT_TYPE;
     node_object_prepare($node);
@@ -94,7 +93,6 @@ function contribute_add_new_answer($question_nid, $user_id, $answer_message) {
 
     // Custom fields
     $node->body[LANGUAGE_NONE][0]['value'] = $answer_message;
-    $node->field_answer_user[LANGUAGE_NONE][0]['uid'] = $user_id;
     $node->field_answer_question[LANGUAGE_NONE][0]['nid'] = $question_nid;
     $node->field_answer_votes[LANGUAGE_NONE][0]['value'] = 0;
     node_save($node);
@@ -164,7 +162,7 @@ function contribute_add_answer_vote_callback($question_nid, $answer_nid, $vote_t
     $total_of_votes = contribute_get_total_computed_answer_votes($answer_node, $vote_type);
 
     // Save Answer, votes and user vote
-    contribute_compute_answer_vote($answer_nid, $total_of_votes, $user_id);
+    contribute_compute_answer_vote($answer_nid, $total_of_votes);
 
     // Send success response in a json format
     contribute_send_a_success_vote_response_json_format($total_of_votes, $answer_nid);
@@ -269,12 +267,11 @@ function contribute_send_vote_response_json($args) {
  * @param int $total_of_votes
  * @param int $user_id
  */
-function contribute_compute_answer_vote($answer_nid, $total_of_votes, $user_id){
+function contribute_compute_answer_vote($answer_nid, $total_of_votes){
   $answer_node = node_load($answer_nid);
 
   // Save Answer, votes and user vote
   $answer_node->field_answer_votes[LANGUAGE_NONE][0]['value'] = $total_of_votes;
-  $answer_node->field_answer_user_votes[LANGUAGE_NONE][]['uid'] = $user_id;
   node_save($answer_node);
 }
 
