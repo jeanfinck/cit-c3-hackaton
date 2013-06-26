@@ -8,6 +8,12 @@ define('CONTRIBUTE_QUESTION_CONTENT_TYPE', 'question');
 define('CONTRIBUTE_ANSWER_CONTENT_TYPE', 'answer');
 define('CONTRIBUTE_VOTE_UP', 'up');
 define('CONTRIBUTE_VOTE_DOWN', 'down');
+define('CONTRIBUTE_PREFIX_TITLE_ANSWER', 'Answer to question node ');
+define('CONTRIBUTE_GAMIFICATION_UP_VOTE', 'upvote');
+define('CONTRIBUTE_GAMIFICATION_DOWN_VOTE', 'downvote');
+define('CONTRIBUTE_FIELD_ANSWER_USER_VOTES', 'field_answer_user_votes');
+define('CONTRIBUTE_FIELD_ANSWER_VOTES', 'field_answer_votes');
+define('CONTRIBUTE_FIELD_ANSWER_QUESTION', 'field_answer_question');
 
 module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
@@ -37,11 +43,11 @@ function contribute_menu() {
       'page arguments' => array(1),
       'type' => MENU_CALLBACK,
     ),
-    'post/answer/vote/%/%' => array(
+    'post/answer/vote/%/%/%' => array(
       'title' => 'Add Votes in a Answer',
       'access arguments' => array('access content'),
-      'page callback' => 'contribute_add_answer_vote',
-      'page arguments' => array(3, 4),
+      'page callback' => 'contribute_add_answer_vote_callback',
+      'page arguments' => array(3, 4, 5),
       'type' => MENU_CALLBACK,
     ),
   );
@@ -94,9 +100,28 @@ function contribute_block_view($delta = '') {
  */
 function contribute_preprocess_node(&$variables){
   if($variables['type'] == CONTRIBUTE_QUESTION_CONTENT_TYPE) {
+    // Select the answers by the current question
     $question_nid = $variables['nid'];
+    drupal_add_js(array('contribute' => array('questionNid' => $question_nid)), 'setting');
     $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
     $variables['correct_answer'] = !empty($variables['field_select_answer'][0]['node']) ? $variables['field_select_answer'][0]['node'] : NULL;
+  }
+}
+
+/**
+ * Implementation of hook_node_load().
+ *
+ * @param array $nodes
+ * @param array $types
+ */
+function contribute_node_load($nodes, $types) {
+  foreach ($nodes as $nid => $node) {
+    if ($node->type == CONTRIBUTE_ANSWER_CONTENT_TYPE) {
+      $user_id = contribute_get_current_user_id();
+      $already_voted = contribute_user_already_voted_for_answer($user_id, $node);
+
+      $node->current_user_already_voted = $already_voted;
+    }
   }
 }
 
@@ -128,7 +153,23 @@ function contribute_timeago_add_js() {
   }
 }
 
+/**
+ * Implements gritter plugin behavior
+ *
+ * Gritter is a notification bubble/popup that appears in the top right of the page.
+ */
+function contribute_add_gritter_plugin() {
+  $gritter_library_path = libraries_get_path('gritter');
+
+  if ($gritter_library_path) {
+    drupal_add_js($gritter_library_path . '/js/jquery.gritter.min.js');
+    drupal_add_css($gritter_library_path . '/css/jquery.gritter.css');
+  }
+}
+
 function contribute_init() {
+  contribute_add_gritter_plugin();
+
   switch (drupal_get_path_alias($_GET['q'])) {
     case 'questions':
     case 'questions/unanswered':

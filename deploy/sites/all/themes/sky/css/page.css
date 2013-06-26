@@ -434,3 +434,11 @@ a.tooltip:hover span{ display:inline; position:absolute; color:#df1d3a; border:1
 .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
 /*CSS3 extras*/
 a.tooltip span { border-radius:4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: 5px 5px 8px #CCC; -webkit-box-shadow: 5px 5px 8px #CCC; box-shadow: 5px 5px 8px #CCC; }
+
+/* Answers Type */
+div.answers div.already-voted {
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #999999;
+}
+/* End Answers Type */

@@ -5,29 +5,34 @@
     // Voting UP
     $('div.answer div.vote a.vote-up').click(function(){
       var answerNid = $('input', $(this).parent()).val();
-      sendNewAnswerVote(answerNid, 'up');
+      var questionNid = Drupal.settings.contribute.questionNid;
+      sendNewAnswerVote(questionNid, answerNid, 'up');
     });
     
     // Voting Down
     $('div.answer div.vote a.vote-down').click(function(){
       var answerNid = $('input', $(this).parent()).val();
-      sendNewAnswerVote(answerNid, 'down');
+      var questionNid = Drupal.settings.contribute.questionNid;
+      sendNewAnswerVote(questionNid, answerNid, 'down');
     });
 
-    function sendNewAnswerVote(answerNid, voteType) {
-      var posting = $.post('/post/answer/vote/' + answerNid + '/' + voteType);
+    function sendNewAnswerVote(questionNid, answerNid, voteType) {
+      var posting = $.post('/post/answer/vote/' + questionNid + '/' + answerNid + '/' + voteType);
 
       posting.done(function(data) {
         var returnedDataObj = JSON.parse(data);
         
         if (returnedDataObj.status == 'success') {
-          // Vote Success
+          // Update votes number
           $('div.answer-nid-' + returnedDataObj.answer + ' span.vote-count-post div.field-item').html(returnedDataObj.votes);
         }
-        else if(returnedDataObj.status == 'error') {
-          // Vote Error
-          alert(returnedDataObj.message);
-        }
+        
+        // Display Glow message
+        $.gritter.add({
+          title: returnedDataObj.title,
+          text: returnedDataObj.message
+        });
+        
       });
     };
     
