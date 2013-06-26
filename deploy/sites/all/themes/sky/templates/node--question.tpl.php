@@ -47,16 +47,18 @@
 
       <!-- Other Answers -->
       <?php if (!empty($correct_answer)){ unset($answers[$correct_answer->nid]); } // Remove correct answer from the normal list
-      foreach ($answers as $nid => $answer_node): ?>
+      foreach ($answers as $nid => $answer_node):?>
       <div class="answer answer-nid-<?php print $nid;?>">
+        <?php if ($answer_node->current_user_already_voted):?>
+        <div class="already-voted">You voted for this Answer</div>
+        <?php endif;?>
         <div class="vote">
           <input type="hidden" value="<?php print $nid;?>">
           <a title="This answer is useful" class="vote-up">up vote</a>
           <span class="vote-count-post ">
           <?php
             $element = field_view_field('node', $answer_node, 'field_answer_votes', array('label'=>'hidden'));
-            print render($element)
-          ;?>
+            print render($element);?>
           </span>
           <a title="This answer is not useful" class="vote-down">down vote</a>
         </div>

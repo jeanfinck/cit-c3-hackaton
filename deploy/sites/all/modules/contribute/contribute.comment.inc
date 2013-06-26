@@ -89,7 +89,7 @@ function contribute_add_new_answer($question_nid, $user_id, $answer_message) {
     $node->type = CONTRIBUTE_ANSWER_CONTENT_TYPE;
     node_object_prepare($node);
 
-    $node->title = "Answer to question node " . $question_nid;
+    $node->title = CONTRIBUTE_PREFIX_TITLE_ANSWER . $question_nid;
     $node->language = LANGUAGE_NONE;
 
     // Custom fields
@@ -137,70 +137,176 @@ function contribute_get_answers_by_question_nid($question_nid) {
   $entities = $query
   ->entityCondition('entity_type', 'node')
   ->propertyCondition('status', 1)
-  ->fieldCondition('field_answer_question', 'nid', $question_nid, '=')
-  ->fieldOrderBy('field_answer_votes','value', 'DESC')
+  ->fieldCondition(CONTRIBUTE_FIELD_ANSWER_QUESTION, 'nid', $question_nid, '=')
+  ->fieldOrderBy(CONTRIBUTE_FIELD_ANSWER_VOTES, 'value', 'DESC')
   ->execute();
 
   return !empty($entities) ? node_load_multiple(array_keys($entities['node'])) : array();
 }
 
-function contribute_add_answer_vote($answer_nid, $vote_type = CONTRIBUTE_VOTE_UP) {
+/**
+ * Add a vote to a given answer
+ *
+ * @param int $answer_nid
+ * @param string $vote_type
+ */
+function contribute_add_answer_vote_callback($question_nid, $answer_nid, $vote_type = CONTRIBUTE_VOTE_UP) {
   $answer_node = node_load($answer_nid);
 
   // Confirms if the user not voted yet
   $user_id = contribute_get_current_user_id();
-  $total_of_votes = contribute_get_total_answer_votes($answer_node);
-  if (!contribute_user_already_voted_for_answer($user_id, $answer_node)) {
-    if ($vote_type == CONTRIBUTE_VOTE_UP) {
-      // Positive Vote
-      $total_of_votes++;
+  if (contribute_answer_belongs_to_question($answer_node, $question_nid)
+      && !contribute_user_already_voted_for_answer($user_id, $answer_node)) {
+    // Add Score
+    _gimme_scores(CONTRIBUTE_GAMIFICATION_UP_VOTE);
 
-      _gimme_scores('upvote');
-    }
-    elseif ($vote_type == CONTRIBUTE_VOTE_DOWN) {
-      // Negative Vote
-      $total_of_votes--;
-
-      _gimme_scores('downvote');
-    }
+    // Total of computed votes
+    $total_of_votes = contribute_get_total_computed_answer_votes($answer_node, $vote_type);
 
     // Save Answer, votes and user vote
-    $answer_node->field_answer_votes[LANGUAGE_NONE][0]['value'] = $total_of_votes;
-    $answer_node->field_answer_user_votes[LANGUAGE_NONE][]['uid'] = $user_id;
-    node_save($answer_node);
+    contribute_compute_answer_vote($answer_nid, $total_of_votes, $user_id);
 
-    print json_encode(array(
-      'status' => 'success',
-      'message' => 'Your vote has been recorded',
-      'votes' => $total_of_votes,
-      'answer' => $answer_node->nid,
-    ));
+    // Send success response in a json format
+    contribute_send_a_success_vote_response_json_format($total_of_votes, $answer_nid);
   }
   else {
-    print json_encode(array(
-      'status' => 'error',
-      'message' => 'You already voted',
-      'votes' => $total_of_votes,
-      'answer' => $answer_node->nid,
-    ));
+    // Add Score
+    _gimme_scores(CONTRIBUTE_GAMIFICATION_DOWN_VOTE);
+
+    // Get default votes of the answer
+    $total_of_votes = contribute_get_total_computed_answer_votes($answer_node);
+
+    // Send error response in a json format
+    contribute_send_a_already_voted_response_json_format($total_of_votes, $answer_nid);
   }
 }
 
+/**
+ * Verifies if a answer belongs to a question
+ *
+ * @param object $answer_node
+ * @param int $question_nid
+ */
+function contribute_answer_belongs_to_question($answer_node, $question_nid) {
+  $belongs = FALSE;
+
+  if ($answer_node->field_answer_question[LANGUAGE_NONE][0]['nid'] == $question_nid) {
+    $belongs = TRUE;
+  }
+
+  return $belongs;
+}
+
+/**
+ * Returns the total of the computed answer votes
+ *
+ * @param object $answer_node
+ * @param string $vote_type
+ */
+function contribute_get_total_computed_answer_votes($answer_node, $vote_type = NULL) {
+  $total_of_votes = contribute_get_total_answer_votes($answer_node);
+
+  switch ($vote_type) {
+    case CONTRIBUTE_VOTE_UP:
+      // Positive Vote
+      $total_of_votes++;
+      break;
+
+    case CONTRIBUTE_VOTE_DOWN:
+      // Negative Vote
+      $total_of_votes--;
+      break;
+  }
+
+  return $total_of_votes;
+}
+
+/**
+ * Send a success response via json format related to a vote to a answer.
+ *
+ * @param int $total_of_votes
+ * @param int $answer_nid
+ */
+function contribute_send_a_success_vote_response_json_format($total_of_votes, $answer_nid) {
+  contribute_send_vote_response_json(array(
+    'status' => 'success',
+    'title' => 'Success!',
+    'message' => 'Your vote for this answer was computed.',
+    'votes' => $total_of_votes,
+    'answer' => $answer_nid,
+  ));
+}
+
+/**
+ * Send a 'already voted' response via json format related to a vote to a answer.
+ *
+ * @param int $total_of_votes
+ * @param int $answer_nid
+ */
+function contribute_send_a_already_voted_response_json_format($total_of_votes, $answer_nid) {
+  contribute_send_vote_response_json(array(
+    'status' => 'error',
+    'title' => 'Attention',
+    'message' => 'You have already voted on this answer.',
+    'votes' => $total_of_votes,
+    'answer' => $answer_nid,
+  ));
+}
+
+/**
+ * Print a response via json format
+ *
+ * @param array $args
+ */
+function contribute_send_vote_response_json($args) {
+  print json_encode($args);
+}
+
+/**
+ * Save the vote information in the answer node
+ *
+ * @param int $answer_nid
+ * @param int $total_of_votes
+ * @param int $user_id
+ */
+function contribute_compute_answer_vote($answer_nid, $total_of_votes, $user_id){
+  $answer_node = node_load($answer_nid);
+
+  // Save Answer, votes and user vote
+  $answer_node->field_answer_votes[LANGUAGE_NONE][0]['value'] = $total_of_votes;
+  $answer_node->field_answer_user_votes[LANGUAGE_NONE][]['uid'] = $user_id;
+  node_save($answer_node);
+}
+
+/**
+ * Verifies that the user has already voted in the answer
+ *
+ * @param int $user_id
+ * @param object $answer_node
+ */
 function contribute_user_already_voted_for_answer($user_id, $answer_node) {
   $already_voted = FALSE;
 
-  $user_votes_field = field_get_items('node', $answer_node, 'field_answer_user_votes');
-  foreach($user_votes_field as $user_vote) {
-    if ($user_vote['uid'] == $user_id) {
-      $already_voted = TRUE;
-      break;
+  $user_votes_field = field_get_items('node', $answer_node, CONTRIBUTE_FIELD_ANSWER_USER_VOTES);
+  if (is_array($user_votes_field)) {
+    foreach($user_votes_field as $user_vote) {
+      if ($user_vote['uid'] == $user_id) {
+        $already_voted = TRUE;
+        break;
+      }
     }
   }
 
   return $already_voted;
 }
 
+/**
+ * Returns the total of the answer votes
+ *
+ * @param object $answer_node
+ */
 function contribute_get_total_answer_votes($answer_node) {
-  $total_votes_field_item = field_get_items('node', $answer_node, 'field_answer_votes');
+  $total_votes_field_item = field_get_items('node', $answer_node, CONTRIBUTE_FIELD_ANSWER_VOTES);
+
   return $total_votes_field_item[0]['value'];
 }
