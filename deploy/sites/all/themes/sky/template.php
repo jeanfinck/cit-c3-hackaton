@@ -51,7 +51,7 @@ function sky_preprocess_page(&$vars) {
   if ($vars['page']['footer'] || $vars['page']['four_first']|| $vars['page']['four_second'] || $vars['page']['four_third'] || $vars['page']['four_fourth']) {
     $vars['classes_array'][] = 'with-footer';
   }
-  
+
   if (isset($vars['node'])) {
   // If the node type is "blog" the template suggestion will be "page--blog.tpl.php".
    $vars['theme_hook_suggestions'][] = 'page__'. str_replace('_', '--', $vars['node']->type);
@@ -91,7 +91,7 @@ function sky_preprocess_node(&$vars) {
   if ($vars['user_picture']) {
     $vars['header_attributes_array']['class'][] = 'with-picture';
   }
-  
+
   if (isset($vars['node'])) {
     // If the node type is "blog" the template suggestion will be "page--blog.tpl.php".
     $vars['theme_hook_suggestions'][] = 'node__'. str_replace('_', '--', $vars['node']->type);
@@ -118,12 +118,6 @@ function sky_process_region(&$vars) {
     $vars['inner_prefix'] = '<h2 class="menu-toggle"><a href="#">' . t('Menu') . '</a></h2>';
   }
 }
-
-
-
-
-
-
 
 
 
