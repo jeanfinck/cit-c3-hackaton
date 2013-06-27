@@ -24,7 +24,7 @@
         
         if (returnedDataObj.status == 'success') {
           // Update votes number
-          $('div.answer-nid-' + returnedDataObj.answer + ' span.vote-count-post div.field-item').html(returnedDataObj.votes);
+          $('div.answer-nid-' + returnedDataObj.answer + ' span.vote-count-post').html(returnedDataObj.votes);
         }
         
         // Display Glow message

@@ -11,9 +11,8 @@ define('CONTRIBUTE_VOTE_DOWN', 'down');
 define('CONTRIBUTE_PREFIX_TITLE_ANSWER', 'Answer to question node ');
 define('CONTRIBUTE_GAMIFICATION_UP_VOTE', 'upvote');
 define('CONTRIBUTE_GAMIFICATION_DOWN_VOTE', 'downvote');
-define('CONTRIBUTE_FIELD_ANSWER_USER_VOTES', 'field_answer_user_votes');
-define('CONTRIBUTE_FIELD_ANSWER_VOTES', 'field_answer_votes');
 define('CONTRIBUTE_FIELD_ANSWER_QUESTION', 'field_answer_question');
+define('CONTRIBUTE_VOTE_TYPE_ANSWER', 1);
 
 module_load_include('inc', 'contribute', 'contribute.question');
 module_load_include('inc', 'contribute', 'contribute.answer');
@@ -46,7 +45,7 @@ function contribute_menu() {
     'post/answer/vote/%/%/%' => array(
       'title' => 'Add Votes in a Answer',
       'access arguments' => array('access content'),
-      'page callback' => 'contribute_add_answer_vote_callback',
+      'page callback' => 'contribute_answer_vote_callback',
       'page arguments' => array(3, 4, 5),
       'type' => MENU_CALLBACK,
     ),
@@ -128,8 +127,11 @@ function contribute_node_load($nodes, $types) {
         // Adds data info in answer nodes
         // Info: Current user already voted
         $user_id = contribute_get_current_user_id();
-        $already_voted = contribute_user_already_voted_for_answer($user_id, $node);
+        $already_voted = contribute_user_already_voted_for_node($user_id, $node->nid, CONTRIBUTE_VOTE_TYPE_ANSWER);
         $node->current_user_already_voted = $already_voted;
+
+        // Info: Votes
+        $node->total_votes = contribute_get_total_node_votes($node->nid);
 
         // Info: Author details
         $node->author_details = user_load($node->uid);
