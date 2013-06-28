@@ -4,6 +4,7 @@
  * Implements a Q&A platform for CI&T collaborators.
  */
 
+// Constants
 define('CONTRIBUTE_QUESTION_CONTENT_TYPE', 'question');
 define('CONTRIBUTE_ANSWER_CONTENT_TYPE', 'answer');
 define('CONTRIBUTE_VOTE_UP', 'up');
@@ -13,12 +14,28 @@ define('CONTRIBUTE_GAMIFICATION_UP_VOTE', 'upvote');
 define('CONTRIBUTE_GAMIFICATION_DOWN_VOTE', 'downvote');
 define('CONTRIBUTE_FIELD_ANSWER_QUESTION', 'field_answer_question');
 define('CONTRIBUTE_VOTE_TYPE_ANSWER', 1);
+define('CONTRIBUTE_ASK_ADVICE_PAGE_PATH', 'questions/ask/advice');
 
-module_load_include('inc', 'contribute', 'contribute.question');
-module_load_include('inc', 'contribute', 'contribute.answer');
-module_load_include('inc', 'contribute', 'contribute.comment');
-module_load_include('inc', 'contribute', 'contribute.debug');
-module_load_include('inc', 'contribute', 'gamification');
+// Always include the required files
+contribute_include_required_inc_files();
+
+/**
+ * Includes the '.inc' required files
+ */
+function contribute_include_required_inc_files() {
+  $files = array(
+    'contribute.common',
+    'contribute.question',
+    'contribute.answer',
+    'contribute.debug',
+    'contribute.vote',
+    'contribute.gamification',
+  );
+
+  foreach ($files as $file) {
+    module_load_include('inc', 'contribute', 'inc/' . $file);
+  }
+}
 
 /**
  * Define menu items and page callbacks.
@@ -38,7 +55,7 @@ function contribute_menu() {
       'title' => 'scores to a user',
       'access arguments' => array('access content'),
       'access callback' => TRUE,
-      'page callback' => '_gimme_scores',
+      'page callback' => 'contribute_gimme_scores',
       'page arguments' => array(1),
       'type' => MENU_CALLBACK,
     ),
@@ -62,14 +79,13 @@ function contribute_menu() {
  *   block and whose values contain the block descriptions.
  */
 function contribute_block_info() {
-  // This example comes from node.module.
   $blocks['advice_accept'] = array(
     'info' => t('Accept advice'),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => 1,
     'region' => 'content',
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => 'questions/ask/advice',
+    'pages' => CONTRIBUTE_ASK_ADVICE_PAGE_PATH,
   );
 
   return $blocks;
@@ -82,15 +98,15 @@ function contribute_block_info() {
  *   An array containing the following elements: subject and content.
  */
 function contribute_block_view($delta = '') {
-  // This example is adapted from node.module.
   $block = array();
 
   switch ($delta) {
     case 'advice_accept':
-      $block['subject'] = t('');
+      $block['subject'] = '';
       $block['content'] = drupal_get_form('contribute_advice_accept_form');
       break;
   }
+
   return $block;
 }
 
@@ -98,8 +114,8 @@ function contribute_block_view($delta = '') {
  * Implementation of hook_preprocess_HOOK().
  */
 function contribute_preprocess_node(&$variables){
+  // Select the answers by the current question
   if($variables['type'] == CONTRIBUTE_QUESTION_CONTENT_TYPE) {
-    // Select the answers by the current question
     $question_nid = $variables['nid'];
     drupal_add_js(array('contribute' => array('questionNid' => $question_nid)), 'setting');
     $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
@@ -140,9 +156,14 @@ function contribute_node_load($nodes, $types) {
   }
 }
 
+/**
+ * Implementation of hook_node_insert().
+ *
+ * @param object $node
+ */
 function contribute_node_insert($node) {
   switch ($node->type) {
-    case 'question':
+    case CONTRIBUTE_QUESTION_CONTENT_TYPE:
       module_load_include('inc', 'pathauto');
       $path = pathauto_create_alias('node', 'insert', 'node/' . $node->nid, array('node' => $node), $node->type);
       drupal_goto($path['alias']);
@@ -150,38 +171,16 @@ function contribute_node_insert($node) {
   }
 }
 
+/**
+ * Implementation of hook_user_login().
+ */
 function contribute_user_login(&$edit, $account) {
   drupal_goto('questions');
 }
 
-
 /**
- * Overrides the default translation of Timeago dates if necessary.
+ * Implementation of hook_init().
  */
-function contribute_timeago_add_js() {
-  $library_path = libraries_get_path('timeago');
-  $path = $library_path . '/jquery.timeago.' . $GLOBALS['language']->language . '.js';
-
-  if (file_exists($path)) {
-    drupal_add_js($path, array('scope' => 'footer'));
-    drupal_add_js($library_path . '/timeago.js', array('scope' => 'footer'));
-  }
-}
-
-/**
- * Implements gritter plugin behavior
- *
- * Gritter is a notification bubble/popup that appears in the top right of the page.
- */
-function contribute_add_gritter_plugin() {
-  $gritter_library_path = libraries_get_path('gritter');
-
-  if ($gritter_library_path) {
-    drupal_add_js($gritter_library_path . '/js/jquery.gritter.min.js');
-    drupal_add_css($gritter_library_path . '/css/jquery.gritter.css');
-  }
-}
-
 function contribute_init() {
   contribute_add_gritter_plugin();
 
