@@ -66,6 +66,13 @@ function contribute_menu() {
       'page arguments' => array(3, 4, 5),
       'type' => MENU_CALLBACK,
     ),
+    'post/answer/right/%/%' => array(
+      'title' => 'Defines the right answer',
+      'access arguments' => array('access content'),
+      'page callback' => 'contribute_select_right_answer_to_question_callback',
+      'page arguments' => array(3, 4),
+      'type' => MENU_CALLBACK,
+    ),
   );
 
   return $items;
@@ -119,7 +126,7 @@ function contribute_preprocess_node(&$variables){
     $question_nid = $variables['nid'];
     drupal_add_js(array('contribute' => array('questionNid' => $question_nid)), 'setting');
     $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
-    $variables['correct_answer'] = !empty($variables['field_select_answer'][0]['node']) ? $variables['field_select_answer'][0]['node'] : NULL;
+    $variables['right_answer'] = !empty($variables['field_select_answer'][0]['node']) ? $variables['field_select_answer'][0]['node'] : NULL;
   }
 }
 
