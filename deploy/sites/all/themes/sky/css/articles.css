@@ -185,15 +185,38 @@ article .tags .field-label,
 
 .vote .vote-up,
 .vote .vote-down {
-  width: 21px;
-  height: 25px;
+  width: 40px;
+  height: 15px;
   display: block;
   text-indent: -999em;
   font-size: 1px;
-  background: url('images/votes.png') left top no-repeat;
+  background: url("images/stack_sprites.png") no-repeat scroll transparent;
 }
+
+.vote .vote-up {
+  background-position: 0 -127px;
+}
+
 .vote .vote-down {
-  background-position: right top;
+  background-position: 0 -161px;
+}
+
+div.answer.right span.vote-accepted-on {
+  width: 40px;
+  height: 35px;
+  display: block;
+  text-indent: -999em;
+  font-size: 1px;
+  background: url("images/stack_sprites.png") no-repeat 0 -319px transparent;
+}
+
+div.answer a.right-answer {
+  width: 40px;
+  height: 35px;
+  display: block;
+  text-indent: -999em;
+  font-size: 1px;
+  background: url("images/stack_sprites.png") no-repeat 0 -420px transparent;
 }
 
 article .answers div.already-voted {
