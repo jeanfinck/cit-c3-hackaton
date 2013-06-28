@@ -127,17 +127,25 @@ function contribute_get_current_user_id() {
 /**
  * Returns an array with the nodes object of the answers related to a question nid
  *
- * @param nid $question_nid
+ * @param int $question_nid
  */
 function contribute_get_answers_by_question_nid($question_nid) {
-  $query = new EntityFieldQuery;
-  $entities = $query
-  ->entityCondition('entity_type', 'node')
-  ->propertyCondition('status', 1)
-  ->fieldCondition(CONTRIBUTE_FIELD_ANSWER_QUESTION, 'nid', $question_nid, '=')
-  ->execute();
+  $query = db_select('node', 'n');
+  $query->leftJoin('contribute_votes', 'v', 'n.nid = v.nid');
+  $query->join('field_data_field_answer_question', 'f', 'f.entity_id = n.nid');
+  $query->groupBy('n.nid');
+  $query->condition('f.field_answer_question_nid', $question_nid, '=');
+  $query->fields('n', array('nid'));
+  $query->addExpression('IFNULL(SUM(vote), 0)', 'total');
+  $query->orderBy('total', 'DESC');
+  $results = $query->execute()->fetchAll();
 
-  return !empty($entities) ? node_load_multiple(array_keys($entities['node'])) : array();
+  $nodes_id = array();
+  foreach ($results as $result) {
+    $nodes_id[] = $result->nid;
+  }
+
+  return node_load_multiple($nodes_id);
 }
 
 /**
@@ -149,31 +157,33 @@ function contribute_get_answers_by_question_nid($question_nid) {
 function contribute_answer_vote_callback($question_nid, $answer_nid, $vote_type) {
   $user_id = contribute_get_current_user_id();
 
-  if (contribure_is_possible_to_make_a_answer_vote($vote_type, $user_id, $answer_nid, $question_nid)) {
-    // Saves user vote
-    if ($vote_type == CONTRIBUTE_VOTE_UP) {
-      $vote = 1;
-      _gimme_scores(CONTRIBUTE_GAMIFICATION_UP_VOTE);
-    }
-    else {
-      $vote = -1;
-      _gimme_scores(CONTRIBUTE_GAMIFICATION_DOWN_VOTE);
-    }
-    contribute_compute_node_vote($answer_nid, $user_id, CONTRIBUTE_VOTE_TYPE_ANSWER, $vote);
+  try {
+    if (contribure_is_possible_to_make_a_answer_vote($vote_type, $user_id, $answer_nid, $question_nid)) {
+      // Saves user vote
+      if ($vote_type == CONTRIBUTE_VOTE_UP) {
+        $vote = 1;
+        _gimme_scores(CONTRIBUTE_GAMIFICATION_UP_VOTE);
+      }
+      else {
+        $vote = -1;
+        _gimme_scores(CONTRIBUTE_GAMIFICATION_DOWN_VOTE);
+      }
+      contribute_compute_node_vote($answer_nid, $user_id, CONTRIBUTE_VOTE_TYPE_ANSWER, $vote);
 
-    // Success response args
-    $vote_response = array(
-      'status' => 'success',
-      'title' => t('Success!'),
-      'message' => t('Your vote for this answer was computed.'),
-    );
+      // Success response args
+      $vote_response = array(
+        'status' => 'success',
+        'title' => t('Success!'),
+        'message' => t('Your vote for this answer was computed.'),
+      );
+    }
   }
-  else {
+  catch (Exception $e) {
     // Error response args
     $vote_response = array(
       'status' => 'error',
       'title' => t('Attention!'),
-      'message' => t('You have already voted on this answer.'),
+      'message' => t($e->getMessage()),
     );
   }
 
@@ -195,11 +205,21 @@ function contribute_answer_vote_callback($question_nid, $answer_nid, $vote_type)
 function contribure_is_possible_to_make_a_answer_vote($vote_type, $user_id, $answer_nid, $question_nid) {
   $answer_node = node_load($answer_nid);
 
+
   $is_a_allowed_vote_type = contribute_is_a_allowed_node_vote_type($vote_type);
   $answer_belongs_to_question = contribute_answer_belongs_to_question($answer_node, $question_nid);
   $user_already_voted_for_node = contribute_user_already_voted_for_node($user_id, $answer_nid, CONTRIBUTE_VOTE_TYPE_ANSWER);
+  $current_user_is_owner_of_answer = ($user_id == $answer_node->uid);
 
-  $is_possible = ($is_a_allowed_vote_type && $answer_belongs_to_question && !$user_already_voted_for_node);
+  // Throw Exceptions
+  if ($current_user_is_owner_of_answer) {
+    throw new Exception('You can not vote for your own answer.');
+  }
+  elseif ($user_already_voted_for_node) {
+    throw new Exception('You have already voted on this answer.');
+  }
+
+  $is_possible = ($is_a_allowed_vote_type && $answer_belongs_to_question && !$user_already_voted_for_node && !$current_user_is_owner_of_answer);
 
   return $is_possible;
 }
