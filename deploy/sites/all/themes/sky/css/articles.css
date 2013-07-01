@@ -201,7 +201,7 @@ article .tags .field-label,
   background-position: 0 -161px;
 }
 
-div.answer.right span.vote-accepted-on {
+div.answer.best span.vote-accepted-on {
   width: 40px;
   height: 35px;
   display: block;
@@ -210,7 +210,7 @@ div.answer.right span.vote-accepted-on {
   background: url("images/stack_sprites.png") no-repeat 0 -319px transparent;
 }
 
-div.answer a.right-answer {
+div.answer a.best-answer {
   width: 40px;
   height: 35px;
   display: block;

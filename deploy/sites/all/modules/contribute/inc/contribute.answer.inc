@@ -248,44 +248,44 @@ function contribute_question_belongs_to_current_user($question_id) {
 }
 
 /**
- * Verifies if a question already have a right answer
+ * Verifies if a question already have a best answer
  *
  * @param int $question_nid
  */
-function contribute_question_already_have_right_answer($question_nid) {
+function contribute_question_already_have_best_answer($question_nid) {
   $question_node = node_load($question_nid);
 
   return isset($question_node->field_select_answer[LANGUAGE_NONE][0]['nid']) ? TRUE : FALSE;
 }
 
 /**
- * Callback to hook_menu to user select the right answer to a question
+ * Callback to hook_menu to user select the best answer to a question
  *
  * @param int $question_nid
  * @param int $answer_nid
  */
-function contribute_select_right_answer_to_question_callback($question_nid, $answer_nid) {
+function contribute_select_best_answer_to_question_callback($question_nid, $answer_nid) {
   $answer_node = node_load($answer_nid);
 
   // Validates if is a correct request
   if (contribute_question_belongs_to_current_user($question_nid)
       && contribute_answer_belongs_to_question($answer_node, $question_nid)
-      && !contribute_question_already_have_right_answer($question_nid)) {
-    contribute_save_right_answer_choice_to_question($question_nid, $answer_nid);
+      && !contribute_question_already_have_best_answer($question_nid)) {
+    contribute_save_best_answer_choice_to_question($question_nid, $answer_nid);
   }
 
   drupal_goto(drupal_get_path_alias('node/' . $question_nid));
 }
 
 /**
- * Save the correct answer to a question
+ * Save the best answer to a question
  *
  * @param int $question_nid
- * @param int $right_answer_nid
+ * @param int $best_answer_nid
  */
-function contribute_save_right_answer_choice_to_question($question_nid, $right_answer_nid) {
+function contribute_save_best_answer_choice_to_question($question_nid, $best_answer_nid) {
   $question_node = node_load($question_nid);
   node_object_prepare($question_node);
-  $question_node->field_select_answer[LANGUAGE_NONE][0]['nid'] = $right_answer_nid;
+  $question_node->field_select_answer[LANGUAGE_NONE][0]['nid'] = $best_answer_nid;
   node_save($question_node);
 }
