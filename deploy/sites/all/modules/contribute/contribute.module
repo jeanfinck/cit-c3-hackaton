@@ -126,7 +126,6 @@ function contribute_preprocess_node(&$variables){
     $question_nid = $variables['nid'];
     drupal_add_js(array('contribute' => array('questionNid' => $question_nid)), 'setting');
     $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
-    $variables['best_answer'] = !empty($variables['field_select_answer'][0]['node']) ? $variables['field_select_answer'][0]['node'] : NULL;
   }
 }
 
