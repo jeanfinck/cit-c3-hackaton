@@ -121,20 +121,33 @@ function contribute_get_node_id_from_question_path($question_path) {
 function contribute_get_answers_by_question_nid($question_nid) {
   $query = db_select('node', 'n');
   $query->leftJoin('contribute_votes', 'v', 'n.nid = v.nid');
-  $query->join('field_data_field_answer_question', 'f', 'f.entity_id = n.nid');
+  $query->leftJoin('field_data_field_select_answer', 's', 's.field_select_answer_nid = n.nid');
+  $query->innerJoin('field_data_field_answer_question', 'f', 'f.entity_id = n.nid');
   $query->groupBy('n.nid');
   $query->condition('f.field_answer_question_nid', $question_nid, '=');
   $query->fields('n', array('nid'));
+  $query->fields('s', array('field_select_answer_nid'));
   $query->addExpression('IFNULL(SUM(vote), 0)', 'total');
+  $query->orderBy('s.field_select_answer_nid', 'DESC');
   $query->orderBy('total', 'DESC');
   $results = $query->execute()->fetchAll();
 
   $nodes_id = array();
+  $best_answer = NULL;
   foreach ($results as $result) {
     $nodes_id[] = $result->nid;
+
+    if ($result->field_select_answer_nid) {
+      $best_answer = $result->field_select_answer_nid;
+    }
   }
 
-  return node_load_multiple($nodes_id);
+  $nodes = node_load_multiple($nodes_id);
+  if ($nodes && $best_answer) {
+    $nodes[$best_answer]->best_answer = true;
+  }
+
+  return $nodes;
 }
 
 /**
