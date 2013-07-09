@@ -11,7 +11,7 @@
   function answerVotesInit() {
     $('div.answer div.vote a.vote-up, div.answer div.vote a.vote-down').click(function(){
       var voteType = $(this).attr('class');
-      var answerNid = $('input', $(this).parent()).val();
+      var answerNid = $('input[type="hidden"]:first', $(this).parents()).val();
       var questionNid = Drupal.settings.contribute.questionNid;
       var dialogTitle = 'Are you sure?';
       var dialogMessage = 'Are you sure you want to make this vote?';

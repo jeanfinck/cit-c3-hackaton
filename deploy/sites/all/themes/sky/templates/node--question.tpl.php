@@ -12,6 +12,7 @@ global $user;
 
     <!-- Question -->
     <div class="question">
+      <input type="hidden" value="<?php print $node->nid;?>">
       <?php print render($content['body']);?>
     </div>
     <!-- [End] Question -->
@@ -47,14 +48,13 @@ global $user;
       <!-- Answers -->
       <?php foreach ($answers as $nid => $answer_node):?>
       <div class="answer answer-nid-<?php print $nid;?> <?php if (isset($answer_node->best_answer)):?>best<?php endif;?>">
-
+        <input type="hidden" value="<?php print $nid;?>">
         <?php if ($answer_node->current_user_already_voted):?>
         <div class="already-voted">You voted for this Answer</div>
         <?php endif;?>
 
         <!-- Vote -->
         <div class="vote">
-          <input type="hidden" value="<?php print $nid;?>">
           <a title="This answer is useful" class="vote-up">up vote</a>
           <span class="vote-count-post "><?php print $answer_node->total_votes;?></span>
           <a title="This answer is not useful" class="vote-down">down vote</a>
@@ -89,7 +89,11 @@ global $user;
         <!-- [End] Answer content -->
 
         <!-- Comments -->
-        <div class="answer-comments"><a>add comment</a></div>
+        <div class="comments-container">
+          <div class="comments">
+            <a class="new">add comment</a>
+          </div>
+        </div>
         <!-- [End] Comments -->
       </div>
       <?php endforeach; ?>
@@ -99,7 +103,7 @@ global $user;
 
   <!-- Comment -->
   <div class="comment-box">
-    <?php print render(drupal_get_form('contribute_answer_comment_form')); ?>
+    <?php print render(drupal_get_form('contribute_new_comment_form')); ?>
   </div>
   <!-- [End] Comment -->
 

@@ -10,42 +10,6 @@
  * @return array
  *   An array of form items.
  */
-function contribute_answer_comment_form($form, &$form_state) {
-  $form['comment'] = array(
-    '#title' => t('Comment'),
-    '#type' => 'textarea',
-    '#description' => t ('Insert a new comment'),
-  );
-
-  $form['type'] = array(
-    '#type' => 'hidden',
-    '#value' => 'question',
-  );
-
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Add comment'),
-    '#ajax' => array(
-      'callback' => 'contribute_answer_comment_form_ajax_submit',
-      'wrapper' => 'answers',
-      'method' => 'replace',
-      'effect' => 'fade',
-    ),
-  );
-
-  return $form;
-}
-
-function contribute_answer_comment_form_ajax_submit($form, &$form_state) {
-  return array("#markup" => "<div id='wrapper'></div>");
-}
-
-/**
- * Form constructor for comments
- *
- * @return array
- *   An array of form items.
- */
 function contribute_answer_form($form, &$form_state) {
   $form['answer'] = array(
     '#title' => t('Your Answer'),

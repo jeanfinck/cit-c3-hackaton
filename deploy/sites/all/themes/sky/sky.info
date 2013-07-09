@@ -44,7 +44,6 @@
 
   scripts[] = js/scripts.js
   scripts[] = js/theme_general.js
-  scripts[] = js/answer_votes.js
   scripts[] = js/jquery_007.js
   scripts[] = js/isotope.js
   scripts[] = js/libraries.js
