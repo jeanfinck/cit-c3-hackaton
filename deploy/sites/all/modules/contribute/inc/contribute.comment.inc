@@ -51,17 +51,54 @@ function contribute_new_comment_form_ajax_submit($form, &$form_state) {
 }
 
 function contribute_add_new_comment($reference_nid, $user_id, $comment) {
-  $node = new stdClass();
-  $node->type = CONTRIBUTE_COMMENT_CONTENT_TYPE;
-  node_object_prepare($node);
+  if ($reference_nid && $user_id && $comment) {
+    $node = new stdClass();
+    $node->type = CONTRIBUTE_COMMENT_CONTENT_TYPE;
+    node_object_prepare($node);
 
-  $node->title = CONTRIBUTE_PREFIX_TITLE_COMMENT . $reference_nid;
-  $node->language = LANGUAGE_NONE;
+    $node->title = CONTRIBUTE_PREFIX_TITLE_COMMENT . $reference_nid;
+    $node->language = LANGUAGE_NONE;
 
-  // Custom fields
-  $node->body[LANGUAGE_NONE][0]['value'] = $comment;
-  $node->field_comment_user[LANGUAGE_NONE][0]['uid'] = $user_id;
-  $node->field_comment_reference[LANGUAGE_NONE][0]['nid'] = $reference_nid;
-  node_save($node);
+    // Custom fields
+    $node->body[LANGUAGE_NONE][0]['value'] = $comment;
+    $node->field_comment_user[LANGUAGE_NONE][0]['uid'] = $user_id;
+    $node->field_comment_reference[LANGUAGE_NONE][0]['nid'] = $reference_nid;
+    node_save($node);
+  }
+}
+
+/**
+ * Get all comments by a given question nid
+ *
+ * @param int $question_nid
+ */
+function contribute_get_comments_by_question($question_nid) {
+  return contribute_retrieve_comments_by_reference_nid($question_nid);
+}
+
+/**
+ * Get all comments by a given answer nid
+ *
+ * @param int $answer_nid
+ */
+function contribute_get_comments_by_answer($answer_nid) {
+  return contribute_retrieve_comments_by_reference_nid($answer_nid);
+}
+
+/**
+ * Retrieve all comments by a related reference node id
+ *
+ * @param int $reference_nid
+ */
+function contribute_retrieve_comments_by_reference_nid($reference_nid) {
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'node')
+  ->entityCondition('bundle', CONTRIBUTE_COMMENT_CONTENT_TYPE)
+  ->propertyCondition('status', 1)
+  ->fieldCondition('field_comment_reference', 'nid', $reference_nid, '=');
+  $result = $query->execute();
+
+  return isset($result['node']) ? node_load_multiple(array_keys($result['node'])) : array();
 }
 
