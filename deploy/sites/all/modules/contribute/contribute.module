@@ -168,8 +168,7 @@ function contribute_node_load($nodes, $types) {
         $node->total_votes = contribute_get_total_node_votes($node->nid);
 
         // Info: User comments
-        // TODO: lista all comments
-        $node->comments = '';
+        $node->comments = contribute_get_comments_by_answer($node->nid);
 
         // Info: Author details
         $node->author_details = user_load($node->uid);

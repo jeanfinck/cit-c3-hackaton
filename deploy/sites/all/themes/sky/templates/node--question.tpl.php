@@ -92,6 +92,9 @@ global $user;
         <div class="comments-container">
           <div class="comments">
             <a class="new">add comment</a>
+            <?php foreach ($answer_node->comments as $comment_node):?>
+            <?php print render(field_view_field('node', $comment_node, 'body', array('label'=>'hidden')));?>
+            <?php endforeach;?>
           </div>
         </div>
         <!-- [End] Comments -->
