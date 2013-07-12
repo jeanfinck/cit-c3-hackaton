@@ -28,9 +28,6 @@ function contribute_new_comment_form($form, &$form_state) {
     '#value' => t('Add comment'),
     '#ajax' => array(
       'callback' => 'contribute_new_comment_form_ajax_submit',
-      'wrapper' => 'answers',
-      'method' => 'replace',
-      'effect' => 'fade',
     ),
   );
 

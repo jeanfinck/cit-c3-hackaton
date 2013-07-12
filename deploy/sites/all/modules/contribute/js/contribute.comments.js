@@ -4,8 +4,8 @@
     /**
      * 'Add new comment' behavior
      */
-    $('div.comments a.new').click(function(){
-      var commentBox = $('div.comment-box'); 
+    $('div.comments a.new').click(function() {
+      var commentBox = $('div.comment-box');
       var QAcontainer = $(this).parents('div.question, div.answer');
       var referenceNid = $('input[type="hidden"]:first', QAcontainer).val();
       
@@ -21,9 +21,26 @@
     /**
      * Cancel Button behavior
      */
-    $('div.comment-box input#edit-cancel').click(function(e){
+    $('div.comment-box input#edit-cancel').click(function(e) {
       e.preventDefault();
       $('div.comment-box').hide();
+      $('form#contribute-new-comment-form textarea#edit-comment', $(this).parents()).val('');
+    });
+    
+    /**
+     * Submit Button behavior
+     */
+    $('div.comment-box input#edit-submit--3').mousedown(function() {
+      var commentBox = $('div.comment-box');
+      var QAcontainer = $(this).parents('div.comments-container');
+      var commentElement = $('form#contribute-new-comment-form textarea#edit-comment', QAcontainer);
+      
+      commentBox.hide();
+      
+      if (commentElement.val()) {
+        $('div.comments', QAcontainer).append('<div class="comment">' + commentElement.val() + ' - Now</div>');
+        commentElement.val(''); // clear textarea of comment
+      }
     });
     
   });
