@@ -93,7 +93,12 @@ global $user;
           <div class="comments">
             <a class="new">add comment</a>
             <?php foreach ($answer_node->comments as $comment_node):?>
-            <?php print render(field_view_field('node', $comment_node, 'body', array('label'=>'hidden')));?>
+            <div class="comment">
+            <?php print $comment_node->body[LANGUAGE_NONE][0]['value'];?>
+             – <?php $user_comment = user_load($comment_node->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
+             <?php print date('M d \a\t H:i', $comment_node->created);?>
+
+            </div>
             <?php endforeach;?>
           </div>
         </div>
