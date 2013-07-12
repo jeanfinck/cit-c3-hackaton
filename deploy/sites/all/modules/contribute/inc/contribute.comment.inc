@@ -42,6 +42,12 @@ function contribute_new_comment_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Submit handler to new comment form submit
+ *
+ * @param array $form
+ * @param array $form_state
+ */
 function contribute_new_comment_form_ajax_submit($form, &$form_state) {
   $node_reference = $form_state['values']['reference'];
   $comment_message = $form_state['values']['comment'];
@@ -50,6 +56,13 @@ function contribute_new_comment_form_ajax_submit($form, &$form_state) {
   contribute_add_new_comment($node_reference, $user_id, $comment_message);
 }
 
+/**
+ * Add new comment
+ *
+ * @param int $reference_nid
+ * @param int $user_id
+ * @param string $comment
+ */
 function contribute_add_new_comment($reference_nid, $user_id, $comment) {
   if ($reference_nid && $user_id && $comment) {
     $node = new stdClass();
@@ -101,4 +114,3 @@ function contribute_retrieve_comments_by_reference_nid($reference_nid) {
 
   return isset($result['node']) ? node_load_multiple(array_keys($result['node'])) : array();
 }
-
