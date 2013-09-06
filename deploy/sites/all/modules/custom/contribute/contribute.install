@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Install functions for the contribute module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function contribute_schema() {
+  $schema['contribute_user_scores'] = array(
+    'description' => 'Table to control scores on contribute game',
+    'fields' => array(
+      'sid' => array(
+        'description' => 'The primary identifier for scores.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The user id.',
+        'type' => 'int',
+        'length' => 10,
+        'not null' => TRUE,
+      ),
+      'score' => array(
+        'description' => 'The user score.',
+        'type' => 'int',
+        'length' => 10,
+      ),
+      'action' => array(
+        'description' => 'The action that made user earn this score',
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    // Fields.
+    'primary key' => array('sid'),
+  );
+  // Contribute_user_scores.
+  $schema['contribute_badges_users'] = array(
+    'description' => 'Table to control achiviements of users',
+    'fields' => array(
+      'buid' => array(
+        'description' => 'The primary identifier for badges x users.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The user id.',
+        'type' => 'int',
+        'length' => 10,
+      ),
+      'badge_nid' => array(
+        'description' => 'The badge id earned',
+        'type' => 'int',
+        'length' => 10,
+      ),
+    ),
+    // Fields.
+    'primary key' => array('buid'),
+  );
+  // Contribute badges definition.
+  return $schema;
+}
