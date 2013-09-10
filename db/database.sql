@@ -3,8 +3,6 @@
 -- Host: localhost    Database: contribute
 
 
-
-
 -- ------------------------------------------------------
 -- Server version	5.5.32-0ubuntu0.13.04.1
 
