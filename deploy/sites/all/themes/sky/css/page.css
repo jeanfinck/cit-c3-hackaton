@@ -318,7 +318,7 @@ div.messages {
   padding: 16px 0px;
 }
 .views-row .views-field-title {
-  padding-left: 10px;
+  padding-left: 2px;
   width: 71%;
 }
 .views-row .views-field {
@@ -339,23 +339,17 @@ div.messages {
 }
 
 .views-field-field-question-category {
-  line-height: 0;
-  margin-top: -6px;
+  display: none;
 }
-.views-field-field-question-category a {
-  background: left top no-repeat;
-  width: 20px;
-  height: 24px;
-  text-indent: -999em;
-  font-size: 1px;
-  margin-left: 10px;
-  display: inline-block;
+.view-questions .views-field:first-child,
+.view-questions .views-field-php,
+.view-questions .views-field-totalcount{
+  width: 64px;
+  border-left: 1px solid #EEE;
+  text-align: center;
 }
-.java .views-field-field-question-category a {
-  background-image: url('images/bg_java.png')
-}
-.drupal .views-field-field-question-category a {
-  background-image: url('images/bg_drupal.png')
+.view-questions .views-field:first-child {
+  border: none;
 }
 
 .views-field-php-1 .count,
@@ -383,17 +377,26 @@ div.messages {
 .views-field-php-1 .field-content,
 .views-field-php .field-content,
 .views-field-totalcount .field-content {
-  font-size: 0.8em;
-  padding: 7px;
+  font-size: 0.750em;
+  padding: 5px 0;
+  margin: 0 5px;
   display: block;
 }
 
 .views-row .views-field-created,
+.view-questions .views-row .views-field-name,
 .views-row .views-field-field-question-user-1 {
   float: right;
   font-size: 0.8em;
   display: inline;
   margin-left: 5px;
+  clear: left;
+}
+.view-questions .views-row .views-field-name {
+  margin-right: 8px;
+}
+.view-questions .views-row .views-field-name:before{
+  content:"by ";
 }
 
 .views-row .views-field-field-question-user-1 .field-content {
