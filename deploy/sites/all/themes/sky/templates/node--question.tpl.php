@@ -67,6 +67,10 @@ global $user;
         </div>
         <!-- [End] Vote -->
 
+        <!-- Answer content -->
+        <?php print render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')));?>
+        <!-- [End] Answer content -->
+
         <!-- User data -->
         <div class="user-data">
           <span class="time">answered <?php print date('D, d M Y H:i:s', $answer_node->created)?></span>
@@ -84,10 +88,6 @@ global $user;
         </div>
         <!-- [End] User data -->
 
-        <!-- Answer content -->
-        <?php print render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')));?>
-        <!-- [End] Answer content -->
-
         <!-- Comments -->
         <div class="comments-container">
           <div class="comments">
@@ -95,8 +95,8 @@ global $user;
             <?php foreach ($answer_node->comments as $comment_node):?>
             <div class="comment">
             <?php print $comment_node->body[LANGUAGE_NONE][0]['value'];?>
-             – <?php $user_comment = user_load($comment_node->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
-             <?php print date('M d \a\t H:i', $comment_node->created);?>
+             – <span>by <?php $user_comment = user_load($comment_node->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
+             <?php print date('M d \a\t H:i', $comment_node->created);?></span>
 
             </div>
             <?php endforeach;?>
