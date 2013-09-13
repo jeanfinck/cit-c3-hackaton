@@ -351,6 +351,10 @@ div.messages {
 .view-questions .views-field:first-child {
   border: none;
 }
+.view-questions .views-field-php .field-content.accepted {
+  background: #f1f8ef url('images/stack_sprites.png') 8px -930px no-repeat;
+  color: green;
+}
 
 .views-field-php-1 .count,
 .views-field-php .count,
