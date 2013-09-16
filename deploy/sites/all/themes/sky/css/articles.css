@@ -269,15 +269,22 @@ article .answers div.user-data {
   background: none;
   margin-bottom: 10px;
 }
-
 article div.user-data span.time {
   margin-bottom: 5px;
   display: block;
 }
-
 article div.user-data img {
   width: 32px;
 }
+article div.user-data .author-info {
+  float: left;
+}
+article div.user-data .badge-icon {
+  background: transparent url("images/stack_sprites.png") -150px -925px no-repeat;
+  padding-left: 13px;
+  display: inline-block;
+}
+
 .comment-box {
   border-top: 1px dashed #DDDDDD;
   clear: both;
