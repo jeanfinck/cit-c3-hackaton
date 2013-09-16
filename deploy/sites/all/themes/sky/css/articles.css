@@ -281,9 +281,13 @@ article div.user-data img {
 .comment-box {
   border-top: 1px dashed #DDDDDD;
   clear: both;
+  display: none;
 }
 .comments .new {
   cursor: pointer;
+}
+.comments-container {
+	padding-left: 56px;
 }
 .comments-container .comment{
   border-top: 1px dashed #CCCCCC;
@@ -302,10 +306,19 @@ article div.user-data img {
   white-space: nowrap;
 }
 
+article .answers h2.answer-count {
+  padding-left: 43px;
+  background: transparent url("images/stack_sprites.png") -146px -767px no-repeat ;
+}
+
 .gritter-item {
   color: #FFF;
 }
 .gritter-close {
   right: 3px;
   left: auto;
+}
+.comments .new {
+  padding-left: 17px;
+  background: transparent url("images/stack_sprites.png") -150px -722px no-repeat ;
 }

@@ -43,7 +43,7 @@ global $user;
 
     <!-- Answers Container -->
     <div class="answers">
-      <h2 clas="answer-count"><?php print count($answers);?> Answers</h2>
+      <h2 class="answer-count"><?php print count($answers);?> Answers</h2>
 
       <!-- Answers -->
       <?php foreach ($answers as $nid => $answer_node):?>
