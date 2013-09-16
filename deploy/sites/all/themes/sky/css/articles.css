@@ -292,7 +292,7 @@ article div.user-data img {
   font-size: 12px;
   margin: 0 auto;
   width: 80%;
-  padding: 5px 0;
+  padding: 5px;
 }
 .comments-container .comment:last-child{
   border-bottom: 1px dashed #CCCCCC;
@@ -302,3 +302,10 @@ article div.user-data img {
   white-space: nowrap;
 }
 
+.gritter-item {
+  color: #FFF;
+}
+.gritter-close {
+  right: 3px;
+  left: auto;
+}
