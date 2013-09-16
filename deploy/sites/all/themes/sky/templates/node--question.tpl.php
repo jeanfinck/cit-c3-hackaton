@@ -28,8 +28,14 @@ global $user;
                   'width' => '32px',
                   'attributes' => array('align' => 'left', 'hspace' => '10'),
                 ));?>
-        <?php print l($node->author_details->name, 'user/' . $node->uid, array('attributes' => array('target'=>'_blank')));?><br/>
-        <?php print $node->author_details->mail;?>
+        <div class="author-info">
+          <?php print l($node->author_details->name, 'user/' . $node->uid, array('attributes' => array('target'=>'_blank')));?><br/>
+          <?php if ($node->author_details->mail) { ?>
+            <span><?php print $node->author_details->mail;?></span><br>
+          <?php } ?>
+          <span>Score: 10.000</span><br />
+          <span class="badge-icon">4 badges</span>
+        </div>
       </div>
     </div>
     <!-- [End] Question user data -->
@@ -82,8 +88,14 @@ global $user;
                       'width' => '32px',
                       'attributes' => array('align' => 'left', 'hspace' => '10'),
                     ));?>
-            <?php print l($answer_node->author_details->name, 'user/' . $answer_node->author_details->uid, array('attributes' => array('target'=>'_blank')));?><br/>
-            <?php print $answer_node->author_details->mail;?>
+            <div class="author-info">
+              <?php print l($answer_node->author_details->name, 'user/' . $answer_node->author_details->uid, array('attributes' => array('target'=>'_blank')));?><br/>
+              <?php if ($answer_node->author_details->mail){ ?>
+                <span><?php print $answer_node->author_details->mail;?></span><br>
+              <?php } ?>
+              <span>Score: 10.000</span><br />
+              <span class="badge-icon">4 badges</span>
+            </div>
           </div>
         </div>
         <!-- [End] User data -->
