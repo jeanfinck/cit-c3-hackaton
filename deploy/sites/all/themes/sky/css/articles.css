@@ -170,6 +170,7 @@ article .tags .field-label,
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
 }
+
 /* voting */
 .vote {
   float: left;
@@ -183,7 +184,6 @@ article .tags .field-label,
   text-align: center;
   padding: 0;
 }
-
 .vote .vote-up,
 .vote .vote-down {
   width: 40px;
@@ -193,24 +193,22 @@ article .tags .field-label,
   font-size: 1px;
   background: url("images/stack_sprites.png") no-repeat scroll transparent;
 }
-
 .vote .vote-up {
   background-position: 0 -127px;
 }
-
 .vote .vote-down {
   background-position: 0 -161px;
 }
-
-div.answer.best span.vote-accepted-on {
-  width: 40px;
-  height: 35px;
-  display: block;
-  text-indent: -999em;
-  font-size: 1px;
-  background: url("images/stack_sprites.png") no-repeat 0 -319px transparent;
+.vote .vote-up.voted {
+  height: 24px;
+  background-position: 0 -87px;
+}
+.vote .vote-down.voted {
+  height: 24px;
+  background-position: 0 -188px;
 }
 
+div.answer span.vote-accepted-on,
 div.answer a.best-answer {
   width: 40px;
   height: 35px;
@@ -219,7 +217,9 @@ div.answer a.best-answer {
   font-size: 1px;
   background: url("images/stack_sprites.png") no-repeat 0 -420px transparent;
 }
-
+div.answer span.vote-accepted-on {
+  background-position:  0 -319px;
+}
 article .answers div.already-voted {
   font-size: 12px;
   margin-bottom: 10px;
@@ -301,3 +301,4 @@ article div.user-data img {
   color: #999;
   white-space: nowrap;
 }
+
