@@ -217,8 +217,8 @@ $databases = array (
     array (
       'database' => 'contribute',
       'username' => 'root',
-      'password' => 'p@ssw0rd',
-      'host' => 'jnjdevapd03.cit',
+      'password' => '',
+      'host' => 'localhost',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
