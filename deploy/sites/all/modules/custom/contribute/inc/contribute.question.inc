@@ -166,18 +166,11 @@ function contribute_question_form_submit($form, &$form_state) {
 
   $node = new stdClass;
   $node->type = CONTRIBUTE_QUESTION_CONTENT_TYPE;
-  $node->name = $user->name;
-  $node->created = strtotime("now");
-  $node->changed = strtotime("now");
-  $node->status = 1;
-  $node->comment = 0;
-  $node->promote = 0;
+  node_object_prepare($node);
   $node->language = LANGUAGE_NONE;
-  $node->moderate = 0;
-  $node->sticky = 0;
-  $node->revision = 0;
   $node->title = $form_state['values']['title'];
   $node->body[LANGUAGE_NONE][0] = $form_state['values']['question'];
+  $node->field_question_category[LANGUAGE_NONE][0] = $form_state['values']['category'];
 
   foreach ($tags as $tag) {
     $node->field_question_tags[LANGUAGE_NONE][]['tid'] = $tag['tid'];
