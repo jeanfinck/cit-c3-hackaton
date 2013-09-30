@@ -16,6 +16,7 @@ define('CONTRIBUTE_GAMIFICATION_UP_VOTE', 'upvote');
 define('CONTRIBUTE_GAMIFICATION_DOWN_VOTE', 'downvote');
 define('CONTRIBUTE_FIELD_ANSWER_QUESTION', 'field_answer_question');
 define('CONTRIBUTE_VOTE_TYPE_ANSWER', 1);
+define('CONTRIBUTE_VOTE_TYPE_QUESTION', 2);
 define('CONTRIBUTE_ASK_ADVICE_PAGE_PATH', 'questions/ask/advice');
 define('CONTRIBUTE_VOTES_JS_FILE', 'contribute.votes.js');
 define('CONTRIBUTE_COMMENTS_JS_FILE', 'contribute.comments.js');
@@ -69,6 +70,13 @@ function contribute_menu() {
       'access arguments' => array('access content'),
       'page callback' => 'contribute_answer_vote_callback',
       'page arguments' => array(3, 4, 5),
+      'type' => MENU_CALLBACK,
+    ),
+    'post/question/vote/%/%' => array(
+      'title' => 'Add Votes in a Question',
+      'access arguments' => array('access content'),
+      'page callback' => 'contribute_question_vote_callback',
+      'page arguments' => array(3, 4),
       'type' => MENU_CALLBACK,
     ),
     'post/answer/best/%/%' => array(
@@ -153,6 +161,9 @@ function contribute_node_load($nodes, $types) {
         // Adds data info in question nodes
         // Info: Author details.
         $node->author_details = user_load($node->uid);
+
+        // Info: Question Votes
+        $node->votes = contribute_get_total_node_votes($node->nid);
         break;
 
       case CONTRIBUTE_ANSWER_CONTENT_TYPE:

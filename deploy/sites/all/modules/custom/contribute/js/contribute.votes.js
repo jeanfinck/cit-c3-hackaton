@@ -1,71 +1,51 @@
 // $Id$
 (function ($) {
   $(document).ready(function() {
-    answerVotesInit();
+    votesInit();
     bestAnswerInit();
   });
 
   /**
-   * Implements answer votes behavior
+   * Implements votes behavior
    */
-  function answerVotesInit() {
-    $('div.answer div.vote a.vote-up, div.answer div.vote a.vote-down').click(function(){
-      var voteType = $(this).attr('class');
-      var answerNid = $('input[type="hidden"]:first', $(this).parents()).val();
-      var questionNid = Drupal.settings.contribute.questionNid;
-      var dialogTitle = 'Are you sure?';
-      var dialogMessage = 'Are you sure you want to make this vote?';
+  function votesInit() {
+    $('div.vote a.vote-up, div.vote a.vote-down').click(function(){
+      var nid = $('input[type="hidden"]:first', $(this).parents()).val();
+      var voteElement = $(this).closest('div').parent();
+      var voteValue = $(this).attr('class');
       
-      newAnswerVote(questionNid, answerNid, voteType, dialogTitle, dialogMessage);
-    });
-  }
-  
-  /**
-   * New answer vote behavior
-   */
-  function newAnswerVote(questionNid, answerNid, voteType, dialogTitle, dialogMessage) {
-    $('body').append('<div id="dialog-confirm"><p>' + Drupal.t(dialogMessage) + '</p></div>');
-    
-    $("div#dialog-confirm").dialog({
-      resizable: false,
-      modal: true,
-      draggable: false,
-      title: Drupal.t(dialogTitle),
-      buttons: {
-        'OK': function() {
-          $(this).dialog('close');
-          $(this).remove();
-          sendAnswerVoteRequest(questionNid, answerNid, voteType);
-        },
-        Cancel: function() {
-          $(this).dialog('close');
-          $(this).remove();
-        }
-      }
+      sendVoteRequest(nid, voteElement, voteValue);
     });
   }
   
   /**
    * Send a post request to save the user vote
    */
-  function sendAnswerVoteRequest(questionNid, answerNid, voteType) {
-    var posting = $.post('/post/answer/vote/' + questionNid + '/' + answerNid + '/' + voteType);
+  function sendVoteRequest(nid, voteElement, voteValue) {
+    if ($(voteElement).hasClass('question')) {
+      var posting = $.post('/post/question/vote/' + nid + '/' + voteValue);
+    }
+    else if ($(voteElement).hasClass('answer')) {
+      var questionNid = Drupal.settings.contribute.questionNid;
+      var posting = $.post('/post/answer/vote/' + questionNid + '/' + nid + '/' + voteValue);
+    }
+    
+    if (typeof posting != 'undefined') {
+      posting.done(function(data) {
+        var returnedDataObj = JSON.parse(data);
+        
+        if (returnedDataObj.status == 'success') {
+          // Dynamically update votes number
+          $('span.vote-count-post', voteElement).html(returnedDataObj.votes);
+        }
 
-    posting.done(function(data) {
-      var returnedDataObj = JSON.parse(data);
-      
-      if (returnedDataObj.status == 'success') {
-        // Dynamically update votes number
-        $('div.answer-nid-' + returnedDataObj.answer + ' span.vote-count-post').html(returnedDataObj.votes);
-      }
-      
-      // Display Glow message
-      $.gritter.add({
-        title: returnedDataObj.title,
-        text: returnedDataObj.message
+        // Display Glow message
+        $.gritter.add({
+          title: returnedDataObj.title,
+          text: returnedDataObj.message
+        });
       });
-      
-    });
+    }
   };
   
   /**
@@ -98,4 +78,5 @@
       });
     });
   }
+  
 })(jQuery);

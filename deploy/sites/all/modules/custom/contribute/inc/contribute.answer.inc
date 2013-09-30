@@ -155,7 +155,7 @@ function contribute_answer_vote_callback($question_nid, $answer_nid, $vote_type)
 
   // Send vote response
   $total_of_votes = contribute_get_total_node_votes($answer_nid);
-  contribute_send_node_vote_response_json_format(array_merge(array('votes' => $total_of_votes, 'answer' => $answer_nid), $vote_response));
+  contribute_send_node_vote_response_json_format(array_merge(array('votes' => $total_of_votes, 'nid' => $answer_nid), $vote_response));
 }
 
 /**

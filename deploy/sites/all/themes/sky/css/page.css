@@ -351,7 +351,7 @@ div.messages {
 .view-questions .views-field:first-child {
   border: none;
 }
-.view-questions .views-field-php .field-content.accepted {
+.view-questions .views-field-php .field-content .answers.accepted {
   background: #f1f8ef url('images/stack_sprites.png') 8px -930px no-repeat;
   color: green;
 }
@@ -379,12 +379,21 @@ div.messages {
 }
 
 .views-field-php-1 .field-content,
-.views-field-php .field-content,
 .views-field-totalcount .field-content {
   font-size: 0.750em;
   padding: 5px 0;
   margin: 0 5px;
   display: block;
+}
+
+.view-questions .views-field-php .field-content .answers {
+  padding: 5px 0;
+}
+
+.views-field-php .field-content {
+  font-size: 0.750em;
+  margin: 0 5px;
+  display: block; 
 }
 
 .views-row .views-field-created,
