@@ -13,6 +13,13 @@ global $user;
     <!-- Question -->
     <div class="question">
       <input type="hidden" value="<?php print $node->nid;?>">
+        <!-- Vote -->
+        <div class="vote">
+          <a title="This question shows research effort it is useful and clear" class="vote-up">up vote</a>
+          <span class="vote-count-post "><?php print $node->votes; ?></span>
+          <a title="This question does not show any research effort it is unclear or not useful" class="vote-down">down vote</a>
+        </div>
+        <!-- [End] Vote -->
       <?php print render($content['body']);?>
     </div>
     <!-- [End] Question -->

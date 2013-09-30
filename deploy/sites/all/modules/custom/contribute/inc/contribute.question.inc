@@ -220,3 +220,77 @@ function contribute_advice_accept_form_submit($form, &$form_state) {
 function contribute_form_search_block_form_alter(&$form, &$form_state, $form_id) {
   $form['search_block_form']['#placeholder'] = t('search for questions here!');
 }
+
+/**
+ * Validates if is possible to make a new question vote
+ *
+ * @param string $vote_type
+ * @param int $user_id
+ * @param int $question_nid
+ *
+ * @return boolean $is_possible
+ */
+function contribure_is_possible_to_make_a_question_vote($vote_type, $user_id, $question_nid) {
+  $question_node = node_load($question_nid);
+
+  $is_a_allowed_vote_type = contribute_is_a_allowed_node_vote_type($vote_type);
+  $user_already_voted_for_node = contribute_user_already_voted_for_node($user_id, $question_nid, CONTRIBUTE_VOTE_TYPE_QUESTION);
+  $current_user_is_owner_of_question = ($user_id == $question_node->uid);
+
+  // Throw Exceptions
+  if ($current_user_is_owner_of_question) {
+    throw new Exception('You can not vote for your own question.');
+  }
+  elseif ($user_already_voted_for_node) {
+    throw new Exception('You have already voted on this question.');
+  }
+
+  $is_possible = ($is_a_allowed_vote_type && !$user_already_voted_for_node && !$current_user_is_owner_of_question);
+
+  return $is_possible;
+}
+
+/**
+ * Add a vote to a given question
+ *
+ * @param int $question_nid
+ * @param string $vote_type
+ */
+function contribute_question_vote_callback($question_nid, $vote_type) {
+  $user_id = contribute_get_current_user_id();
+
+  try {
+    if (contribure_is_possible_to_make_a_question_vote($vote_type, $user_id, $question_nid)) {
+      // Saves user vote
+      if ($vote_type == CONTRIBUTE_VOTE_UP) {
+        $vote = 1;
+        contribute_gimme_scores(CONTRIBUTE_GAMIFICATION_UP_VOTE);
+      }
+      else {
+        $vote = -1;
+        contribute_gimme_scores(CONTRIBUTE_GAMIFICATION_DOWN_VOTE);
+      }
+      contribute_compute_node_vote($question_nid, $user_id, CONTRIBUTE_VOTE_TYPE_QUESTION, $vote);
+
+      // Success response args
+      $vote_response = array(
+        'status' => 'success',
+        'title' => t('Success!'),
+        'message' => t('Your vote for this question was computed.'),
+      );
+    }
+  }
+  catch (Exception $e) {
+    // Error response args
+    $vote_response = array(
+      'status' => 'error',
+      'title' => t('Attention!'),
+      'message' => t($e->getMessage()),
+    );
+  }
+
+  // Send vote response
+  $total_of_votes = contribute_get_total_node_votes($question_nid);
+  contribute_send_node_vote_response_json_format(array_merge(array('votes' => $total_of_votes, 'nid' => $question_nid), $vote_response));
+}
+
