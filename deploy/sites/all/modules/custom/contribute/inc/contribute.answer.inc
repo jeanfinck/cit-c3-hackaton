@@ -13,7 +13,10 @@
 function contribute_answer_form($form, &$form_state) {
   $form['answer'] = array(
     '#title' => t('Your Answer'),
-    '#type' => 'textarea',
+    '#type' => 'text_format',
+    '#format' => 'minimal',
+    '#base_type' => 'textarea',
+    '#required' => TRUE,
   );
 
   $form['submit'] = array(
@@ -21,6 +24,23 @@ function contribute_answer_form($form, &$form_state) {
     '#value' => t('Post Your Answer'),
   );
 
+  return $form;
+}
+
+/**
+ * Validation handler for contribute_question_form().
+ *
+ * @param  [type] $form
+ * @param  [type] $form_state
+ * @return [type]
+ */
+function contribute_form_contribute_answer_form_alter(&$form, &$form_state, $form_id) {
+  $form['#after_build'][] = 'contribute_answer_form_after_build';
+}
+
+function contribute_answer_form_after_build(&$form) {
+  $form['answer']['format']['#access'] = FALSE;
+  unset($form['answer']['#pre_render'][0]);
   return $form;
 }
 
@@ -34,7 +54,7 @@ function contribute_answer_form($form, &$form_state) {
  */
 function contribute_answer_form_submit($form, $form_state) {
   $question_nid = contribute_get_node_id_from_question_path($form_state['complete form']['#action']);
-  $answer_message = $form_state['values']['answer'];
+  $answer_message = $form_state['values']['answer']['value'];
 
   contribute_add_new_answer($question_nid, $answer_message);
 }
