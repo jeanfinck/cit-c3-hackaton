@@ -81,7 +81,7 @@ global $user;
         <!-- [End] Vote -->
 
         <!-- Answer content -->
-        <?php print render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')));?>
+        <?php print html_entity_decode(render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')))); ?>
         <!-- [End] Answer content -->
 
         <!-- User data -->
