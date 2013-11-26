@@ -1,7 +1,4 @@
-<?php
-$best_answer = field_get_items('node', $node, 'field_select_answer');
-global $user;
-?>
+<?php $best_answer = field_get_items('node', $node, 'field_select_answer'); global $user; ?>
 
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php print $unpublished; ?>
@@ -21,38 +18,54 @@ global $user;
         </div>
         <!-- [End] Vote -->
       <?php print render($content['body']);?>
-    </div>
-    <!-- [End] Question -->
 
-    <!-- Question user data -->
-    <div class="user-data">
-      <span class="time">posted <?php print date('D, d M Y H:i:s', $node->created)?></span>
-      <div class="author">
-        <?php $user_image_path = isset($node->author_details->picture->uri) ? $node->author_details->picture->uri : 'public://pictures/default_user_avatar.png';
-          print theme('image', array(
-                  'path' => $user_image_path,
-                  'title' => $node->author_details->name,
-                  'width' => '32px',
-                  'attributes' => array('align' => 'left', 'hspace' => '10'),
-                ));?>
-        <div class="author-info">
-          <?php print l($node->author_details->name, 'user/' . $node->uid, array('attributes' => array('target'=>'_blank')));?><br/>
-          <?php if ($node->author_details->mail) { ?>
-            <span><?php print $node->author_details->mail;?></span><br>
-          <?php } ?>
-          <span>Score: 10.000</span><br />
-          <span class="badge-icon">4 badges</span>
+      <!-- Question user data -->
+      <div class="user-data">
+        <span class="time">posted <?php print date('D, d M Y H:i:s', $node->created);?></span>
+        <div class="author">
+          <?php $user_image_path = isset($node->author_details->picture->uri) ? $node->author_details->picture->uri : 'public://pictures/default_user_avatar.png';
+            print theme('image', array(
+                    'path' => $user_image_path,
+                    'title' => $node->author_details->name,
+                    'width' => '32px',
+                    'attributes' => array('align' => 'left', 'hspace' => '10'),
+                  ));?>
+          <div class="author-info">
+            <?php print l($node->author_details->name, 'user/' . $node->uid, array('attributes' => array('target'=>'_blank')));?><br/>
+            <?php if ($node->author_details->mail) { ?>
+              <span><?php print $node->author_details->mail;?></span><br>
+            <?php } ?>
+            <span>Score: 10.000</span><br />
+            <span class="badge-icon">4 badges</span>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- [End] Question user data -->
+      <!-- [End] Question user data -->
 
-    <!-- Tag and categories -->
-    <div class="tags categories">
-      <?php print render($content['field_question_category']);?>
-      <?php print render($content['field_question_tags']);?>
-    </div>
-    <!-- [End] Tag and categories -->
+      <!-- Comments -->
+      <div class="comments-container">
+        <div class="comments">
+          <a class="new">add comment</a>
+          <?php foreach ($node->comments as $question_comment): ?>
+          <div class="comment">
+          <?php print $question_comment->body[LANGUAGE_NONE][0]['value'];?>
+           – <span>by <?php $user_comment = user_load($question_comment->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
+           <?php print date('M d \a\t H:i', $question_comment->created);?></span>
+
+          </div>
+          <?php endforeach;?>
+        </div>
+      </div>
+      <!-- [End] Comments -->
+
+      <!-- Tag and categories -->
+      <div class="tags categories">
+        <?php print render($content['field_question_category']);?>
+        <?php print render($content['field_question_tags']);?>
+      </div>
+      <!-- [End] Tag and categories -->
+      </div>
+      <!-- [End] Question -->
 
     <!-- Answers Container -->
     <div class="answers">

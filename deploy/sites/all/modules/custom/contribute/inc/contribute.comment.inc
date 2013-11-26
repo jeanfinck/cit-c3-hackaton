@@ -87,15 +87,6 @@ function contribute_get_comments_by_question($question_nid) {
 }
 
 /**
- * Get all comments by a given answer nid
- *
- * @param int $answer_nid
- */
-function contribute_get_comments_by_answer($answer_nid) {
-  return contribute_retrieve_comments_by_reference_nid($answer_nid);
-}
-
-/**
  * Retrieve all comments by a related reference node id
  *
  * @param int $reference_nid
