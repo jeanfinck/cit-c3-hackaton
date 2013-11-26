@@ -42,10 +42,16 @@
       </div>
       <!-- [End] Question user data -->
 
+      <!-- Tag and categories -->
+      <div class="tags categories">
+        <?php print render($content['field_question_category']);?>
+        <?php print render($content['field_question_tags']);?>
+      </div>
+      <!-- [End] Tag and categories -->
+
       <!-- Comments -->
       <div class="comments-container">
         <div class="comments">
-          <a class="new">add comment</a>
           <?php foreach ($node->comments as $question_comment): ?>
           <div class="comment">
           <?php print $question_comment->body[LANGUAGE_NONE][0]['value'];?>
@@ -54,16 +60,10 @@
 
           </div>
           <?php endforeach;?>
+          <a class="new">add comment</a>
         </div>
       </div>
       <!-- [End] Comments -->
-
-      <!-- Tag and categories -->
-      <div class="tags categories">
-        <?php print render($content['field_question_category']);?>
-        <?php print render($content['field_question_tags']);?>
-      </div>
-      <!-- [End] Tag and categories -->
       </div>
       <!-- [End] Question -->
 
@@ -123,15 +123,14 @@
         <!-- Comments -->
         <div class="comments-container">
           <div class="comments">
-            <a class="new">add comment</a>
             <?php foreach ($answer_node->comments as $comment_node):?>
             <div class="comment">
             <?php print $comment_node->body[LANGUAGE_NONE][0]['value'];?>
              – <span>by <?php $user_comment = user_load($comment_node->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
              <?php print date('M d \a\t H:i', $comment_node->created);?></span>
-
             </div>
             <?php endforeach;?>
+            <a class="new">add comment</a>
           </div>
         </div>
         <!-- [End] Comments -->
