@@ -294,3 +294,13 @@ function contribute_question_vote_callback($question_nid, $vote_type) {
   contribute_send_node_vote_response_json_format(array_merge(array('votes' => $total_of_votes, 'nid' => $question_nid), $vote_response));
 }
 
+/**
+ * Gets the selected answer by a question.
+ *
+ * @param object $question_node
+ */
+function contribute_question_get_selected_answer($question_node) {
+  $selected_answer_items = field_get_items('node', $question_node, 'field_select_answer');
+
+  return $selected_answer_items ? $selected_answer_items[0]['nid'] : NULL;
+}

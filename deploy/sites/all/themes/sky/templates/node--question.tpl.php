@@ -1,5 +1,10 @@
-<?php $best_answer = field_get_items('node', $node, 'field_select_answer'); global $user; ?>
+<?php
+/**
+ * TODO: Insert template variables available.
+ */
+?>
 
+<?php $best_answer = field_get_items('node', $node, 'field_select_answer'); global $user; ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php print $unpublished; ?>
   <?php print render($title_prefix); ?>
@@ -32,9 +37,9 @@
                   ));?>
           <div class="author-info">
             <?php print l($node->author_details->name, 'user/' . $node->uid, array('attributes' => array('target'=>'_blank')));?><br/>
-            <?php if ($node->author_details->mail) { ?>
+            <?php if ($node->author_details->mail) : ?>
               <span><?php print $node->author_details->mail;?></span><br>
-            <?php } ?>
+            <?php endif; ?>
             <span>Score: 10.000</span><br />
             <span class="badge-icon">4 badges</span>
           </div>
@@ -50,19 +55,7 @@
       <!-- [End] Tag and categories -->
 
       <!-- Comments -->
-      <div class="comments-container">
-        <div class="comments">
-          <?php foreach ($node->comments as $question_comment): ?>
-          <div class="comment">
-          <?php print $question_comment->body[LANGUAGE_NONE][0]['value'];?>
-           – <span>by <?php $user_comment = user_load($question_comment->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
-           <?php print date('M d \a\t H:i', $question_comment->created);?></span>
-
-          </div>
-          <?php endforeach;?>
-          <a class="new">add comment</a>
-        </div>
-      </div>
+      <?php print render($content['comments']); ?>
       <!-- [End] Comments -->
       </div>
       <!-- [End] Question -->
@@ -72,79 +65,19 @@
       <h2 class="answer-count"><?php print count($answers);?> Answers</h2>
 
       <!-- Answers -->
-      <?php foreach ($answers as $nid => $answer_node):?>
-      <div class="answer answer-nid-<?php print $nid;?> <?php if (isset($answer_node->best_answer)):?>best<?php endif;?>">
-        <input type="hidden" value="<?php print $nid;?>">
-        <?php if ($answer_node->current_user_already_voted):?>
-        <div class="already-voted">You voted for this Answer</div>
-        <?php endif;?>
+      <?php
+      foreach ($answers as $nid => $answer_node) {
+        $answer_node_view = node_view($answer_node);
 
-        <!-- Vote -->
-        <div class="vote">
-          <a title="This answer is useful" class="vote-up">up vote</a>
-          <span class="vote-count-post "><?php print $answer_node->total_votes;?></span>
-          <a title="This answer is not useful" class="vote-down">down vote</a>
-          <?php if (($node->uid == $user->uid) && !$best_answer):?>
-          <a title="Select the best Answer" class="best-answer" href="/post/answer/best/<?php print $node->nid;?>/<?php print $answer_node->nid;?>">Best Answer</a>
-          <?php endif;?>
-          <?php if (isset($answer_node->best_answer)):?>
-          <span class="vote-accepted-on" title="The question owner accepted this as the best answer">accepted</span>
-          <?php endif;?>
-        </div>
-        <!-- [End] Vote -->
+        // Adds answer comment box.
+        $answer_node_view['comments'] = comment_node_page_additions($answer_node);
 
-        <!-- Answer content -->
-        <?php print html_entity_decode(render(field_view_field('node', $answer_node, 'body', array('label'=>'hidden')))); ?>
-        <!-- [End] Answer content -->
-
-        <!-- User data -->
-        <div class="user-data">
-          <span class="time">answered <?php print date('D, d M Y H:i:s', $answer_node->created)?></span>
-          <div class="author">
-            <?php $user_image_path = isset($answer_node->author_details->picture->uri) ? $answer_node->author_details->picture->uri : 'public://pictures/default_user_avatar.png';
-              print theme('image', array(
-                      'path' => $user_image_path,
-                      'title' => $answer_node->author_details->name,
-                      'width' => '32px',
-                      'attributes' => array('align' => 'left', 'hspace' => '10'),
-                    ));?>
-            <div class="author-info">
-              <?php print l($answer_node->author_details->name, 'user/' . $answer_node->author_details->uid, array('attributes' => array('target'=>'_blank')));?><br/>
-              <?php if ($answer_node->author_details->mail){ ?>
-                <span><?php print $answer_node->author_details->mail;?></span><br>
-              <?php } ?>
-              <span>Score: 10.000</span><br />
-              <span class="badge-icon">4 badges</span>
-            </div>
-          </div>
-        </div>
-        <!-- [End] User data -->
-
-        <!-- Comments -->
-        <div class="comments-container">
-          <div class="comments">
-            <?php foreach ($answer_node->comments as $comment_node):?>
-            <div class="comment">
-            <?php print $comment_node->body[LANGUAGE_NONE][0]['value'];?>
-             – <span>by <?php $user_comment = user_load($comment_node->uid); print l($user_comment->name, 'user/' . $user_comment->uid, array('attributes' => array('target'=>'_blank')));?>
-             <?php print date('M d \a\t H:i', $comment_node->created);?></span>
-            </div>
-            <?php endforeach;?>
-            <a class="new">add comment</a>
-          </div>
-        </div>
-        <!-- [End] Comments -->
-      </div>
-      <?php endforeach; ?>
+        print drupal_render($answer_node_view);
+      }
+      ?>
     </div>
     <!-- [End] Answers Container -->
   </div>
-
-  <!-- Comment -->
-  <div class="comment-box">
-    <?php print render(drupal_get_form('contribute_new_comment_form')); ?>
-  </div>
-  <!-- [End] Comment -->
 
   <!-- New Answer -->
   <?php global $user; if ($node->uid != $user->uid):?>

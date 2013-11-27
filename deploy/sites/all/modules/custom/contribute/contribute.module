@@ -134,57 +134,52 @@ function contribute_block_view($delta = '') {
  * Implements of hook_preprocess_HOOK().
  */
 function contribute_preprocess_node(&$variables) {
-  // Select the answers by the current question.
-  if ($variables['type'] == CONTRIBUTE_QUESTION_CONTENT_TYPE) {
-    $question_nid = $variables['nid'];
+  switch ($variables['type']) {
+    case CONTRIBUTE_QUESTION_CONTENT_TYPE:
+      $question_nid = $variables['nid'];
 
-    // Add Scripts.
-    drupal_add_js(drupal_get_path('module', 'contribute') . '/js/' . CONTRIBUTE_VOTES_JS_FILE);
-    drupal_add_js(drupal_get_path('module', 'contribute') . '/js/' . CONTRIBUTE_COMMENTS_JS_FILE);
+      // Add Scripts.
+      drupal_add_js(drupal_get_path('module', 'contribute') . '/js/' . CONTRIBUTE_VOTES_JS_FILE);
+      drupal_add_js(drupal_get_path('module', 'contribute') . '/js/' . CONTRIBUTE_COMMENTS_JS_FILE);
 
-    // Add question node id to js scope.
-    drupal_add_js(array('contribute' => array('questionNid' => $question_nid)), 'setting');
+      // Add question node id to js scope.
+      drupal_add_js(array('contribute' => array('questionNid' => $question_nid)), 'setting');
 
-    // Add all answers related to this question.
-    $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
-  }
-}
+      // Add all answers related to this question.
+      $variables['answers'] = contribute_get_answers_by_question_nid($question_nid);
 
-/**
- * Implements of hook_node_load().
- */
-function contribute_node_load($nodes, $types) {
-  foreach ($nodes as $nid => $node) {
+      // Author details.
+      $variables['author_details'] = user_load($variables['node']->uid);
 
-    switch ($node->type) {
-      case CONTRIBUTE_QUESTION_CONTENT_TYPE:
-        // Adds data info in question nodes
-        // Info: Author details.
-        $node->author_details = user_load($node->uid);
+      // Question Votes
+      $variables['votes'] = contribute_get_total_node_votes($variables['node']->nid);
+      break;
 
-        // Info: Question Votes
-        $node->votes = contribute_get_total_node_votes($node->nid);
+    case CONTRIBUTE_ANSWER_CONTENT_TYPE:
+      // Get question node related to the current answer.
+      $question_items = field_get_items('node', $variables['node'], 'field_answer_question');
+      $question = $question_items[0]['node'];
 
-        // Info: User comments.
-        $node->comments = contribute_retrieve_comments_by_reference_nid($node->nid);
-        break;
+      // Sets question node.
+      $variables['question'] = $question;
 
-      case CONTRIBUTE_ANSWER_CONTENT_TYPE:
-        // Adds data info in answer nodes
-        // Info: Current user already voted.
-        $user_id = contribute_get_current_user_id();
-        $node->current_user_already_voted = contribute_user_already_voted_for_node($user_id, $node->nid, CONTRIBUTE_VOTE_TYPE_ANSWER);
+      // Sets selected answer nid.
+      $question_selected_answer_items = field_get_items('node', $question, 'field_select_answer');
+      $variables['question']->selected_answer = $question_selected_answer_items[0]['nid'];
 
-        // Info: Votes.
-        $node->total_votes = contribute_get_total_node_votes($node->nid);
+      // Current user already voted.
+      $user_id = contribute_get_current_user_id();
+      $variables['current_user_already_voted'] = contribute_user_already_voted_for_node($user_id, $variables['node']->nid, CONTRIBUTE_VOTE_TYPE_ANSWER);
 
-        // Info: User comments.
-        $node->comments = contribute_retrieve_comments_by_reference_nid($node->nid);
+      // Votes.
+      $variables['total_votes'] = contribute_get_total_node_votes($variables['node']->nid);
 
-        // Info: Author details.
-        $node->author_details = user_load($node->uid);
-        break;
-    }
+      // Author details.
+      $variables['author_details'] = user_load($variables['node']->uid);
+
+      // Best Answer.
+      $variables['is_best_answer'] = contribute_is_selected_answer($variables['node']);
+      break;
   }
 }
 

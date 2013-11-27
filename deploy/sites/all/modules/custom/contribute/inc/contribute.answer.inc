@@ -104,16 +104,17 @@ function contribute_get_node_id_from_question_path($question_path) {
  */
 function contribute_get_answers_by_question_nid($question_nid) {
   $query = db_select('node', 'n');
+  $query->addExpression('IFNULL(SUM(v.vote), 0)', 'votes');
+  $query->fields('n', array('nid'));
+  $query->fields('s', array('field_select_answer_nid'));
   $query->leftJoin('contribute_votes', 'v', 'n.nid = v.nid');
   $query->leftJoin('field_data_field_select_answer', 's', 's.field_select_answer_nid = n.nid');
   $query->innerJoin('field_data_field_answer_question', 'f', 'f.entity_id = n.nid');
-  $query->groupBy('n.nid');
   $query->condition('f.field_answer_question_nid', $question_nid, '=');
-  $query->fields('n', array('nid'));
-  $query->fields('s', array('field_select_answer_nid'));
-  $query->addExpression('IFNULL(SUM(vote), 0)', 'total');
+  $query->groupBy('n.nid');
   $query->orderBy('s.field_select_answer_nid', 'DESC');
-  $query->orderBy('total', 'DESC');
+  $query->orderBy('votes', 'DESC');
+  $query->orderBy('n.created', 'ASC');
   $results = $query->execute()->fetchAll();
 
   $nodes_id = array();
@@ -128,7 +129,7 @@ function contribute_get_answers_by_question_nid($question_nid) {
 
   $nodes = node_load_multiple($nodes_id);
   if ($nodes && $best_answer) {
-    $nodes[$best_answer]->best_answer = true;
+    $nodes[$best_answer]->best_answer = TRUE;
   }
 
   return $nodes;
@@ -219,7 +220,8 @@ function contribure_is_possible_to_make_a_answer_vote($vote_type, $user_id, $ans
 function contribute_answer_belongs_to_question($answer_node, $question_nid) {
   $belongs = FALSE;
 
-  if ($answer_node->field_answer_question[LANGUAGE_NONE][0]['nid'] == $question_nid) {
+  $question_node = contribute_get_question_related_to_answer($answer_node);
+  if ($question_node->nid == $question_nid) {
     $belongs = TRUE;
   }
 
@@ -285,4 +287,35 @@ function contribute_save_best_answer_choice_to_question($question_nid, $best_ans
   node_object_prepare($question_node);
   $question_node->field_select_answer[LANGUAGE_NONE][0]['nid'] = $best_answer_nid;
   node_save($question_node);
+}
+
+/**
+ * Returns the question related to a given answer.
+ *
+ * @param object $answer_node
+ */
+function contribute_get_question_related_to_answer($answer_node) {
+  $question_reference_items = field_get_items('node', $answer_node, 'field_answer_question');
+  $question_node = $question_reference_items[0]['node'];
+
+  return $question_node;
+}
+
+/**
+ * Checks if a given answer is the selected choice from question.
+ *
+ * @param object $answer_nid
+ *   The node object of the related answer.
+ */
+function contribute_is_selected_answer($answer_node) {
+  $is_selected_answer = FALSE;
+
+  $question_node = contribute_get_question_related_to_answer($answer_node);
+
+  $question_selected_answer = contribute_question_get_selected_answer($question_node);
+  if (!is_null($question_selected_answer) && $question_selected_answer == $answer_node->nid) {
+    $is_selected_answer = TRUE;
+  }
+
+  return $is_selected_answer;
 }
