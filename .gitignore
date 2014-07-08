@@ -2,4 +2,5 @@
 .project
 .settings/*
 .DS_Store
+deploy/sites/default/settings.php
 deploy/sites/default/files/tmp/*
